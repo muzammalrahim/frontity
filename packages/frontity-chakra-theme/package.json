@@ -1,0 +1,62 @@
+{
+  "_from": "frontity-chakra-theme",
+  "_id": "frontity-chakra-theme@1.0.2",
+  "_inBundle": false,
+  "_integrity": "sha512-5GR6ZHdX7wYHH8zUovmM6H3Hg+nesqUg4yC2PSjrSw7+NW4RKU8gV5D/k8IfDb6ObzCEIp35nrIWXe73V1DojA==",
+  "_location": "/frontity-chakra-theme",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "frontity-chakra-theme",
+    "name": "frontity-chakra-theme",
+    "escapedName": "frontity-chakra-theme",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/frontity-chakra-theme/-/frontity-chakra-theme-1.0.2.tgz",
+  "_shasum": "42c96db89eec30bf644a05960ff950640b19b27f",
+  "_spec": "frontity-chakra-theme",
+  "_where": "D:\\frontend\\frontity-wp",
+  "author": {
+    "name": "Segun Adebayo",
+    "email": "sage@adebayosegun.com"
+  },
+  "bugs": {
+    "url": "https://github.com/chakra-ui/frontity-chakra-ui-theme/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "@chakra-ui/react": "^1.3.3",
+    "@frontity/components": "^1.7.1",
+    "@frontity/hooks": "^2.2.0",
+    "@frontity/html2react": "^1.6.1",
+    "framer-motion": "^3.9.2",
+    "frontity": "^1.14.2",
+    "react-icons": "^4.2.0"
+  },
+  "deprecated": false,
+  "description": "A frontity theme made with Chakra UI",
+  "homepage": "https://github.com/chakra-ui/frontity-chakra-ui-theme#readme",
+  "keywords": [
+    "wordpress",
+    "frontity",
+    "frontity-theme",
+    "frontity-amp"
+  ],
+  "license": "MIT",
+  "name": "frontity-chakra-theme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chakra-ui/frontity-chakra-ui-theme.git"
+  },
+  "version": "1.0.2"
+}
