@@ -36,7 +36,7 @@ const Archive = ({ state }) => {
           title={decode(state.source.author[data.id].name)}
         />
       )}
-        <Flex p="40px" flexGrow="1" direction="row">
+        <Flex p="40px"  flexGrow="1" direction="row">
       <Box
         padding={{ base: "24px", lg: "40px" }}
         bg="white"

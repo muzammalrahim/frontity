@@ -4,7 +4,8 @@ import { PostImageWithOverlay } from "../featured-post/components";
 import Link from "../link";
 import PostCategories from "../post/post-categories";
 import { styled ,css} from "frontity";
-
+import { IoIosCloseCircle} from "react-icons/io";
+import { HiChevronDoubleRight } from "react-icons/hi";
 
 
 import {decode} from "frontity";
@@ -52,9 +53,7 @@ const PostPreview = ({ data, ...rest }) => {
   
         
         <Box
-          my="20px"
-          mt ="1px"
-          bt ="1px"
+        
           flex="1"
           fontSize="sm" 
           color= "#666666"
