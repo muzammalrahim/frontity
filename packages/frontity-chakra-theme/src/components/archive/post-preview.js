@@ -60,7 +60,8 @@ const PostPreview = ({ data, ...rest }) => {
           color= "#666666"
           dangerouslySetInnerHTML={{ __html: excerpt }}
         />
-        <Link link={link} bg="#08f"  width={{ md: "25%" }} p="8px" color="white" css={css`text-align: center`} > Read More </Link>
+  
+        <Link link={link} bg="#08f"  width={{ md: "25%" }} p="8px" color="white" css={css` text-align: center ; border-radius: 4px; `} > Read More </Link>
         {/*<PostCategories
           color="black"
           justify="flex-start"
