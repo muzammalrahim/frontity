@@ -17,6 +17,7 @@
   },
   "prettier": {},
   "dependencies": {
+    "@chakra-ui/icons": "^1.0.11",
     "@frontity/core": "^1.11.1",
     "@frontity/frontity-chakra-theme": "./packages/frontity-chakra-theme",
     "@frontity/html2react": "^1.6.2",

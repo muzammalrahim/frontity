@@ -52,7 +52,6 @@ const Archive = ({ state }) => {
             return <ArchiveItem key={item.id} item={item} />;
           })}
         </SimpleGrid>
-
         <Pagination mt="56px" />
       </Box>
         <Box width={{ lg: "25%" }} padding={{ base: "24px", lg: "40px" }} bg="white">
