@@ -1,5 +1,5 @@
 import { Box, ChakraProvider, extendTheme } from "@chakra-ui/react";
-import { connect, Head } from "frontity";
+import { connect, Head, Global, css } from "frontity";
 import Switch from "@frontity/components/switch";
 import React from "react";
 import Archive from "./archive";
@@ -11,6 +11,8 @@ import Post from "./post/post";
 import SearchResults from "./search";
 import Title from "./title";
 import FontFace from "./styles/font-face";
+import mainTheme from "./styles/wp-site/style.min.css";
+import widgetCSS from "./styles/wp-site/widgets.min.css";
 
 // Theme is the root React component of our theme. The one we will export
 // in roots.
@@ -27,6 +29,8 @@ const Theme = ({ state }) => {
 
   return (
     <ChakraProvider theme={{ ...overrides }}>
+        <Global styles={css(mainTheme)} />
+      <Global styles={css(widgetCSS)} />
       <FontFace />
       {/* Add some metatags to the <head> of the HTML. */}
       <Title />
