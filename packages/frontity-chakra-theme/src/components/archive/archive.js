@@ -36,7 +36,7 @@ const Archive = ({ state }) => {
           title={decode(state.source.author[data.id].name)}
         />
       )}
-        <Flex p="40px" flexGrow="1" direction="row">
+        <Flex p="40px"  flexGrow="1" direction="row">
       <Box
         padding={{ base: "24px", lg: "40px" }}
         bg="white"
@@ -52,7 +52,6 @@ const Archive = ({ state }) => {
             return <ArchiveItem key={item.id} item={item} />;
           })}
         </SimpleGrid>
-
         <Pagination mt="56px" />
       </Box>
         <Box width={{ lg: "25%" }} padding={{ base: "24px", lg: "40px" }} bg="white">
