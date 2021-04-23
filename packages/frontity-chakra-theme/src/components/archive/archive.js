@@ -18,7 +18,7 @@ const Archive = ({ state }) => {
   }
 
   return (
-    <Box bg="accent.50" as="section">
+    <Box background="white" as="section" >
       {/* If the list is a taxonomy, we render a title. */}
       {data.isTaxonomy && (
         <ArchiveHeader
@@ -43,6 +43,7 @@ const Archive = ({ state }) => {
         width={{ lg: "75%" }}
         maxWidth="1200px"
         mx="auto"
+       
       >
         {/* Iterate over the items of the list. */}
         <SimpleGrid columns={{ base: 1, md: 1 }} spacing="40px">
