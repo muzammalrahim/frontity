@@ -2,6 +2,8 @@ import { Box, Flex, Text } from "@chakra-ui/react";
 import { FaRegClock } from 'react-icons/fa';
 import React from "react";
 
+
+
 const TopNavBar = props => (
   <Box
     as="nav"
@@ -27,7 +29,7 @@ const TobNavBarInner = props => (
 const TopNav = ({ ...props }) => (
     <TopNavBar {...props}>
         <TobNavBarInner>
-            <Box fontSize="12px" as="div" d="flex" alignItems="center"><FaRegClock />  {new Date().toDateString()}</Box>
+            <Box fontSize="12px" as="div" d="flex" alignItems="center"><FaRegClock />   {new Date().toDateString()}</Box>
             <Box as="div" ml="10px" bg="#f05555" color="white" p="0 10px" fontSize="12px">Breaking News</Box>
         </TobNavBarInner>
     </TopNavBar>

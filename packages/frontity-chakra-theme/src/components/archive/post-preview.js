@@ -1,13 +1,12 @@
-import { Box, color, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import React from "react";
 import { PostImageWithOverlay } from "../featured-post/components";
 import Link from "../link";
-import PostCategories from "../post/post-categories";
 import { styled ,css} from "frontity";
 import {decode} from "frontity";
 import {formatDate} from "../helpers";
 const PostPreview = ({ data, ...rest }) => {
-  const { title, excerpt, featured_media, link, categories } = data;
+  const { title, excerpt, featured_media, link} = data;
   return (
     <Flex
       direction="row"
@@ -18,7 +17,7 @@ const PostPreview = ({ data, ...rest }) => {
       shadow="md"
       {...rest}
     >
-      {/* Use the frontity settings for featuredPost here */}
+   
       {featured_media && featured_media.src && (
           <Flex py="40px" pl="40px" pr="20px" flexGrow="1" direction="column" position="relative" width="50%">
         <Link link={link}>
@@ -39,7 +38,7 @@ const PostPreview = ({ data, ...rest }) => {
           </Text>
         </Flex>
      
-       <Heading fontSize="2xl" as="h4" textTransform="uppercase">  
+       <Heading fontSize="20px" fontFamily="Poppins"  as="h4" textTransform="uppercase">  
        <StyledDiv>  <Link  link={link}>{title}</Link>   </StyledDiv>
       </Heading>
   
@@ -57,12 +56,13 @@ const PostPreview = ({ data, ...rest }) => {
           &:focus {
             background-color: #036fcd;
           }
-        } `} > Read More </Link>
+        } `} > Read More </Link> 
         {/*<PostCategories
           color="black"
           justify="flex-start"
           categories={categories}
         />*/}
+
       </Flex>
     </Flex>
   );
