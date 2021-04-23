@@ -2,6 +2,18 @@ import Theme from "./components";
 import image from "@frontity/html2react/processors/image";
 import processors from "./components/styles/processors";
 // import { theme } from "@chakra-ui/react";
+import { sidebar } from "./utils/handlers";
+
+const before = async ({ libraries, actions }) => {
+  // We use html2react to process the <img> tags inside the content HTML.
+  // libraries.html2react.processors.push(image);
+
+  // Add handlers for both /players/ and /players/:name.
+  libraries.source.handlers.push(sidebar);
+
+  // Fetch all the players.
+  await actions.source.fetch("/sidebar/primary-widget-area");
+};
 
 const chakraTheme = {
   name: "frontity-chakra-theme",
@@ -82,7 +94,9 @@ const chakraTheme = {
       },
       closeSearchModal: ({ state }) => {
         state.theme.isSearchModalOpen = false;
-      }
+      },
+      beforeSSR: before,
+      beforeCSR: before
     }
   },
   libraries: {

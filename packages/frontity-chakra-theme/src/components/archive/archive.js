@@ -48,7 +48,7 @@ const Archive = ({ state }) => {
         <SimpleGrid columns={{ base: 1, md: 1 }} spacing="40px">
           {data.items.map(({ type, id }) => {
             const item = state.source[type][id];
-            // console.log('item id: '+id,item);
+            // console.log('type id: '+id,type);
             return <ArchiveItem key={item.id} item={item} />;
           })}
         </SimpleGrid>
