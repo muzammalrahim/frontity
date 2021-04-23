@@ -28,7 +28,8 @@ const settings = {
             ],
             [
               "Senior Resources",
-              "/category/senior-resources/"
+              "/category/senior-resources/",
+              
             ],
             [
               "Retirement",

@@ -6,25 +6,21 @@ import PostCategories from "../post/post-categories";
 import { styled ,css} from "frontity";
 import {decode} from "frontity";
 import {formatDate} from "../helpers";
-
-
 const PostPreview = ({ data, ...rest }) => {
   const { title, excerpt, featured_media, link, categories } = data;
-
-
-
   return (
     <Flex
       direction="row"
       position="relative"
       bg="white"
+      box-shadow= "none"
       as="article"
       shadow="md"
       {...rest}
     >
       {/* Use the frontity settings for featuredPost here */}
       {featured_media && featured_media.src && (
-          <Flex p="40px" pr="20px" flexGrow="1" direction="column" position="relative" width="50%">
+          <Flex py="40px" pl="40px" pr="20px" flexGrow="1" direction="column" position="relative" width="50%">
         <Link link={link}>
           <PostImageWithOverlay {...featured_media} />
         </Link>
@@ -49,14 +45,19 @@ const PostPreview = ({ data, ...rest }) => {
   
         
         <Box
-        
           flex="1"
           fontSize="sm" 
           color= "#666666"
           dangerouslySetInnerHTML={{ __html: excerpt }}
         />
   
-        <Link link={link} bg="#08f"  width={{ md: "25%" }} p="8px" color="white" css={css` text-align: center ; border-radius: 4px; `} > Read More </Link>
+          <Link link={link} bg="#08f"  width={{ md: "150px" }} mt="5px" py="8px"  color="white" css={css` text-align: center ; border-radius: 4px;  &:hover {
+            background-color: #036fcd;
+         
+          &:focus {
+            background-color: #036fcd;
+          }
+        } `} > Read More </Link>
         {/*<PostCategories
           color="black"
           justify="flex-start"
@@ -71,11 +72,11 @@ export default PostPreview;
 
 
 const StyledDiv = styled.div`
-    &:hover {
-      color: #4ac2f5;
-     
-      &:focus {
-        color: #4ac2f5;
-      }
-    }
+&:hover {
+  color: #4ac2f5;
+ 
+  &:focus {
+    color: #4ac2f5;
+  }
+}
 `;
