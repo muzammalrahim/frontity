@@ -7,11 +7,14 @@ import HomepageArchive from "./homepage-archive";
 import Sidebar from "./../sidebar";
 import Pagination from "./pagination";
 import { decode } from "frontity";
+ import { useMediaQuery } from "@chakra-ui/react"
 
 const Archive = ({ state }) => {
   // Get the data of the current list.
   const data = state.source.get(state.router.link);
   // console.log('data ',data);
+
+  const [_isSmallerThan900] = useMediaQuery("(max-width: 900px)")
 
   if (data.isHome && state.router.link === '/') {
       return <HomepageArchive />;
@@ -20,13 +23,13 @@ const Archive = ({ state }) => {
   return (
     <Box background="white" as="section" >
       {/* If the list is a taxonomy, we render a title. */}
-      {data.isTaxonomy && (
+      {/* {data.isTaxonomy && (
         <ArchiveHeader
           showPattern={state.theme.showBackgroundPattern}
           taxonomy={data.taxonomy}
           title={decode(state.source[data.taxonomy][data.id].name)}
         />
-      )}
+      )}*/}
 
       {/* If the list is an author, we render a title. */}
       {data.isAuthor && (
@@ -36,11 +39,11 @@ const Archive = ({ state }) => {
           title={decode(state.source.author[data.id].name)}
         />
       )}
-        <Flex p="40px"  flexGrow="1" direction="row">
+        <Flex p="40px"  flexGrow="1" direction={_isSmallerThan900 ?"column": "row"} >
       <Box
         padding={{ base: "24px", lg: "40px" }}
         bg="white"
-        width={{ lg: "75%" }}
+        width={_isSmallerThan900 ?{ lg: "100%" } :{ lg: "75%" }}
         maxWidth="1200px"
         mx="auto"
        
@@ -55,7 +58,10 @@ const Archive = ({ state }) => {
         </SimpleGrid>
         <Pagination mt="56px" />
       </Box>
-        <Box width={{ lg: "25%" }} padding={{ base: "24px", lg: "40px" }} bg="white">
+        <Box  
+            width={_isSmallerThan900 ?{ lg: "100%" } :{ lg: "25%" }}
+            padding={{ base: "24px", lg: "40px" }} 
+            bg="white">
             <Sidebar/>
         </Box>
         </Flex>

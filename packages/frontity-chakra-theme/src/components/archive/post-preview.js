@@ -5,15 +5,16 @@ import Link from "../link";
 import { styled ,css} from "frontity";
 import {decode} from "frontity";
 import {formatDate} from "../helpers";
-import { useMediaQuery } from "@chakra-ui/react"
+ import { useMediaQuery } from "@chakra-ui/react"
 const PostPreview = ({ data, ...rest }) => {
   const { title, excerpt, featured_media, link} = data;
   
-  const [isSmallerThan900] = useMediaQuery("(max-width: 900px)")
+ const [isSmallerThan800] = useMediaQuery("(max-width: 800px)")
+  
   return (
     <Flex
-      direction={isSmallerThan900 ?"column" :"row"} 
-      position="relative"
+    position="relative"
+    direction={isSmallerThan800 ? "column": "row"} 
       bg="white"
       box-shadow= "none"
       as="article"
@@ -22,8 +23,7 @@ const PostPreview = ({ data, ...rest }) => {
    
       {featured_media && featured_media.src && (
 
-      <Flex py="40px" pl="40px" pr="20px" flexGrow="1" direction="column" position="relative"
-      width={isSmallerThan900 ?"100%" :"50%"}>
+        <Flex py="40px" pl="40px" pr="20px" flexGrow="1" direction="column" position="relative" width={isSmallerThan800 ?"100%":"50%"}>
         <Link link={link}>
           <PostImageWithOverlay {...featured_media} />
         </Link>
@@ -31,7 +31,7 @@ const PostPreview = ({ data, ...rest }) => {
         
       )}
 
-      <Flex p="40px"  pl="0px" flexGrow="1" direction="column" width={isSmallerThan900 ?"100%" :"50%"} >
+      <Flex py="40px" pl="10px" pr="0px"  flexGrow="1" direction="column" width={isSmallerThan800 ?"100%":"50%"} >
         <Flex direction="row" mb="5px">
           <Text fontSize="sm">
             <Link color="#767676" link={data.author.link}>
