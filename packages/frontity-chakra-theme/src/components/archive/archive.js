@@ -31,6 +31,9 @@ const Archive = ({ state }) => {
         />
       )}*/}
 
+  
+     <h1>  Home/{decode(state.source[data.taxonomy][data.id].name)}</h1>
+
       {/* If the list is an author, we render a title. */}
       {data.isAuthor && (
         <ArchiveHeader
