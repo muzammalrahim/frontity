@@ -61,9 +61,9 @@ const SiteMenuItem = ({ link, ...props }) => (
 const Navigation = ({ menu, ...props }) => (
   <Box as="nav" width="100%" display={{ base: "none", lg: "block" }} {...props}>
     <SiteMenu>
-      {menu.map(({name, link}) => (
+      {menu.map(({name, link,submenu}) => (
         <SiteMenuItem key={name} link={link}>
-          {name}
+          {name} 
         </SiteMenuItem>
       ))}
     </SiteMenu>
