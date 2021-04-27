@@ -40,6 +40,8 @@ export const SiteMenu = props => (
   />
 );
 
+
+
 const SiteMenuItem = ({ link, ...props }) => (
   <Box
     as="li"
@@ -59,7 +61,7 @@ const SiteMenuItem = ({ link, ...props }) => (
 const Navigation = ({ menu, ...props }) => (
   <Box as="nav" width="100%" display={{ base: "none", lg: "block" }} {...props}>
     <SiteMenu>
-      {menu.map(([name, link]) => (
+      {menu.map(({name, link}) => (
         <SiteMenuItem key={name} link={link}>
           {name}
         </SiteMenuItem>

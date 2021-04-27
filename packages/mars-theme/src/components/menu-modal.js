@@ -1,6 +1,27 @@
 import { styled, connect } from "frontity";
 import Link from "./link";
 
+const Menu = ({options, currentPageLink}) => (
+  <StyledMenu submenu={submenu}>
+    {options.map(({name, link, submenu}) => {
+      const isCurrentPage = currentPageLink === link;
+      return (
+        <MenuItem key={name}>
+          {/* If link url is the current page, add `aria-current` for a11y */}
+          <MenuLink
+          link={link}
+          aria-current={isCurrentPage ? "page" : undefined}
+        >
+          {name}
+        </MenuLink>
+       
+        </MenuItem>
+      );
+    })}
+  </StyledMenu>
+)
+
+
 const MenuModal = ({ state }) => {
   const { menu } = state.theme;
   const isThereLinks = menu != null && menu.length > 0;
@@ -9,21 +30,37 @@ const MenuModal = ({ state }) => {
     <>
       <MenuOverlay />
       <MenuContent as="nav">
-        {isThereLinks &&
-          menu.map(([name, link]) => (
-            <MenuLink
-              key={name}
-              link={link}
-              aria-current={state.router.link === link ? "page" : undefined}
-            >
-              {name}
-            </MenuLink>
-          ))}
+        {isThereLinks &&   <Menu options={menu} currentPageLink={state.router.link} />
+         }
       </MenuContent>
     </>
   );
 };
+const StyledMenu = styled.ul`
+  display: flex;
+  flex-direction: ${({submenu}) => submenu && 'column'};
+  visibility: ${({submenu}) => submenu && 'hidden'};
+  position: ${({submenu}) => submenu && 'absolute'};
+  font-size: 1.8rem;
+  font-weight: 500;
+  letter-spacing: -0.0277em;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  list-style: none;
+  margin: ${({submenu}) => submenu ? '10px' : 0};
+  width: ${({submenu}) => submenu && '100px'};
 
+  ${MenuItem}:hover & {
+    visibility: ${({submenu}) => submenu && 'visible'};
+  }
+
+  @media (min-width: 1220px) {
+    margin-top: ${({submenu}) => submenu ? '10px' : '-0.8rem'}; ;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    margin-left: -2.5rem;
+  }
+`;
 const MenuOverlay = styled.div`
   background-color: #1f38c5;
   width: 100vw;
@@ -58,5 +95,7 @@ const MenuLink = styled(Link)`
     /* border-bottom: 4px solid yellow; */
   }
 `;
+
+
 
 export default connect(MenuModal);
