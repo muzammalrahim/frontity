@@ -29,6 +29,7 @@ const SocialMenuItem = ({ icon, label, link, ...props }) => (
     as="li"
     listStyleType="none"
     margin="0"
+
     {...props}
   >
     <Link link={link}>

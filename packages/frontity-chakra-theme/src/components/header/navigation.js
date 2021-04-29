@@ -93,6 +93,7 @@ const SiteMenuItem2 = ({ link, ...props }) => (
     textTransform="uppercase"
     position="relative"
     cursor="pointer"
+    margin="15px"
     {...props}
   >
     <Link2 link={link}>{props.children}</Link2>
@@ -100,7 +101,7 @@ const SiteMenuItem2 = ({ link, ...props }) => (
 );
 
 const Navigation = ({ menu, ...props }) => (
-  <Box as="nav" width="100%" display={{ base: "none", lg: "block" }} {...props}>
+  <Box as="nav" width="100%" position="absolute" display={{ base: "none", lg: "block" }} {...props}>
     <SiteMenu>
       {menu.map(({name, link,submenu}) => (
         <div class="mmenu" css={css`
@@ -110,7 +111,7 @@ const Navigation = ({ menu, ...props }) => (
           {name} 
         </SiteMenuItem>
 
-
+        <MenuItem2 >
         <MenuItem class="innermenu" key={name} css={css`
         position: absolute;
         top: 47px;
@@ -120,23 +121,18 @@ const Navigation = ({ menu, ...props }) => (
         { submenu &&  submenu.map(({name, link,}) => {
           
           return (
-            <div>
+            <>
             
             <SiteMenuItem2 key={name} link={link}>
         <div css={css` 
-         position : relative
-       
-       
+         position : relative  
       } `}>{name} </div>  
         </SiteMenuItem2>
-           
-         
-   
-      
-        </div> );
+                 
+        </> );
         })
       } 
-      </MenuItem>
+      </MenuItem></MenuItem2>
 
       </div>
       ))}
@@ -147,15 +143,22 @@ const Navigation = ({ menu, ...props }) => (
 
 export default Navigation;
 
+
+const MenuItem2 = styled.div`
+position: absolute;
+        top: 47px;
+        background: #000;
+        width:155px;
+`;
 const MenuItem = styled.ul`
 font-size: 10px ! important
 border : 2px solid
 background : black
 position : relative
 list-style : none;
-
-
 `;
+
+
 const StyledMenu = styled.ul`
   display: flex;
   flex-direction: ${({submenu}) => submenu && 'column'};
