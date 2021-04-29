@@ -7,7 +7,7 @@ import MenuItem from "./menu-item";
 import { SocialMenu } from "../header/social-menu";
 
 const Menu = ({ state, actions }) => {
-  const { isMobileMenuOpen } = state.theme;
+  const {isMobileMenuOpen } = state.theme;
   const { openMobileMenu, closeMobileMenu } = actions.theme;
   const buttonRef = useRef();
   return (
@@ -20,7 +20,7 @@ const Menu = ({ state, actions }) => {
         onClose={closeMobileMenu}
       >
         <Stack mt="20%" spacing={6} direction="column" as="ul" ml="0">
-          {state.theme.menu.map(([name, link], index) => (
+          {state.theme.menu.map(({name, link}, index) => (
             <MenuItem link={link} key={name} index={`0${index + 1}`}>
               {name}
             </MenuItem>

@@ -14,32 +14,51 @@ const settings = {
         "theme": {
           logo: "https://seniorresourcehub.com/wp-content/uploads/2021/02/SRH_logo_small.png" ,
           "menu": [
-            [
-              "Home",
-              "/"
-            ],
-            [
-              "Health Insurance",
-              "/category/health-insurance/"
-            ],
-            [
-              "Money and Finance",
-              "/category/senior-resources/money-and-finance/"
-            ],
-            [
-              "Senior Resources",
-              "/category/senior-resources/",
-              
-            ],
-            [
-              "Retirement",
-              "/category/retirement/"
-            ],
-            [
-              "Coronavirus News",
-              "/category/coronavirus/"
-            ]
+            {
+              name: 'Home',
+              link: '/',
+            },
+            {
+              name: 'Health Insurance',
+              link: '/category/health-insurance/',
+            },
+            {
+              name: 'Money and Finance',
+              link: '/category/senior-resources/money-and-finance/',
+            },
+			      {
+              name: 'Money and Finance',
+              link: '/category/senior-resources/money-and-finance/',
+            },
+			      {
+              name: 'Senior Resources',
+              link: '/category/senior-resources/',
+              submenu: [
+                {
+                  name: 'Alzheimers Resources',
+                  link: '/category/senior-resources/alzheimers-resources/'
+                },
+                {
+                  name: 'Social Security',
+                  link: '/category/senior-resources/social-security/'
+                },
+                {
+                  name: 'Aarp',
+                  link: '/category/senior-resources/aarp/'
+                }
+              ]
+            },
+			      {
+              name: 'Retirement',
+              link: '/category/retirement/',
+            },
+            {
+              name: 'Coronavirus News',
+              link: '/category/coronavirus/',
+            
+            }
           ],
+         
           "featured": {
             "showOnList": false,
             "showOnPost": false
