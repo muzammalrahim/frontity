@@ -20,17 +20,15 @@ const FontFace = () => (
         font-display: swap;
       }
       @font-face {
-
         font-family: "Poppins";
-        src: url(${kelsonBoldWOFF}) format("woff"),
-          url(${kelsonBoldTTF}) format("ttf");
+        src: url(${kelsonBoldTTF}) format("ttf");
         font-weight: 700;
         font-display: swap;
-
+      }
+      @font-face {
         font-family: "tiefonticon";
         src: url(${tielabsfontWOFF}) format("woff"),
           url(${tielabsfontTTF}) format("ttf");
-
       }
     `}
   />

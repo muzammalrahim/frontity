@@ -1,15 +1,16 @@
 import { Box, Heading, SimpleGrid } from "@chakra-ui/react";
 import { connect } from "frontity";
-import React from "react";
+import {React, useEffect} from "react";
 import { FeaturedPostSection } from "../featured-post/featured-post";
 import { formatPostData, splitPosts } from "../helpers";
 import { Newsletter } from "../newsletter";
 import HomeArchiveItem from "./home-archive-item";
 import { PaginationButton } from "./pagination";
 
-const HomepageArchive = ({ state, libraries }) => {
+const HomepageArchive = ({ actions, state, libraries }) => {
   // Get the data of the current list.
   const data = state.source.get(state.router.link);
+  // console.log('data: ',state.source)
 
   const [firstThreePosts, othersPosts] = splitPosts(state, data.items);
 
