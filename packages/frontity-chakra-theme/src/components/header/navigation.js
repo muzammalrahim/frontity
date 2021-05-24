@@ -93,6 +93,8 @@ const SiteMenuItem2 = ({ link, ...props }) => (
     textTransform="uppercase"
     position="relative"
     cursor="pointer"
+    margin="15px"
+    listStyle = "none"
     {...props}
   >
     <Link2 link={link}>{props.children}</Link2>
@@ -100,18 +102,20 @@ const SiteMenuItem2 = ({ link, ...props }) => (
 );
 
 const Navigation = ({ menu, ...props }) => (
-  <Box as="nav" width="100%" display={{ base: "none", lg: "block" }} {...props}>
+  <Box as="nav" width="100%" position="absolute" display={{ base: "none", lg: "block" }} {...props}>
     <SiteMenu>
+ 
       {menu.map(({name, link,submenu}) => (
         <div class="mmenu" css={css`
         position:relative;`
       }>
+      <StyledMenu submenu={submenu}>
         <SiteMenuItem  key={name} link={link}>
           {name} 
         </SiteMenuItem>
 
-
-        <MenuItem class="innermenu" key={name} css={css`
+        <MenuItem2 submenu={submenu}>
+         <MenuItem class="innermenu" key={name} css={css`
         position: absolute;
         top: 47px;
         background: #000;
@@ -120,32 +124,29 @@ const Navigation = ({ menu, ...props }) => (
         { submenu &&  submenu.map(({name, link,}) => {
           
           return (
-            <div>
             
             <SiteMenuItem2 key={name} link={link}>
-        <div css={css` 
-         position : relative
-       
-       
-      } `}>{name} </div>  
-        </SiteMenuItem2>
-           
-         
-   
-      
-        </div> );
+                <div css={css` 
+                             position : relative  
+                          } `}>{name} 
+                </div>  
+            </SiteMenuItem2>            
+         );
         })
       } 
-      </MenuItem>
-
+        </MenuItem>
+      </MenuItem2>
+      </StyledMenu>
       </div>
       ))}
-    
+   
     </SiteMenu>
   </Box>
 );
 
 export default Navigation;
+
+
 
 const MenuItem = styled.ul`
 font-size: 10px ! important
@@ -153,30 +154,31 @@ border : 2px solid
 background : black
 position : relative
 list-style : none;
+`;
 
+const MenuItem2 = styled.div`
+position: absolute;
+        top: 47px;
+        background: #000;
+        width:155px;
+        visibility: ${({submenu}) => submenu && 'visible'};
+
+        &: hover  {
+        visibility: ${({submenu}) => submenu && 'hidden'};
+     
+        }
+        &: focus  {
+        visibility: ${({submenu}) => submenu && 'hidden'};
+     
+        }
+
+      
 
 `;
 const StyledMenu = styled.ul`
-  display: flex;
-  flex-direction: ${({submenu}) => submenu && 'column'};
-  visibility: ${({submenu}) => submenu && 'hidden'};
-  font-size: 1.8rem;
-  font-weight: 500;
-  letter-spacing: -0.0277em;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  list-style: none;
-  margin: ${({submenu}) => submenu ? '10px' : 0};
-  width: ${({submenu}) => submenu && '100px'};
-
+list-style : none;
   ${MenuItem}:hover & {
-    visibility: ${({submenu}) => submenu && 'visible'};
+    visibility: ${({submenu}) => submenu && 'hidden'};
   }
- 
-  @media (min-width: 1220px) {
-    margin-top: ${({submenu}) => submenu ? '10px' : '-0.8rem'}; ;
-    margin-right: 0px;
-    margin-bottom: 0px;
-    margin-left: -2.5rem;
-  }
+
 `;
