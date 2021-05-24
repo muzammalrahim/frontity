@@ -77,7 +77,6 @@ const SiteMenuItem = ({ link, ...props }) => (
     textTransform="uppercase"
     position="relative"
     cursor="pointer"
-    border="2px solid"
     {...props}
   >
     <Link link={link}>{props.children}</Link>
@@ -95,6 +94,7 @@ const SiteMenuItem2 = ({ link, ...props }) => (
     position="relative"
     cursor="pointer"
     margin="15px"
+    listStyle = "none"
     {...props}
   >
     <Link2 link={link}>{props.children}</Link2>
@@ -124,19 +124,18 @@ const Navigation = ({ menu, ...props }) => (
         { submenu &&  submenu.map(({name, link,}) => {
           
           return (
-            <> 
+            
             <SiteMenuItem2 key={name} link={link}>
                 <div css={css` 
                              position : relative  
                           } `}>{name} 
                 </div>  
             </SiteMenuItem2>            
-          </> );
+         );
         })
       } 
         </MenuItem>
       </MenuItem2>
-
       </StyledMenu>
       </div>
       ))}
@@ -168,12 +167,16 @@ position: absolute;
         visibility: ${({submenu}) => submenu && 'hidden'};
      
         }
+        &: focus  {
+        visibility: ${({submenu}) => submenu && 'hidden'};
+     
+        }
 
       
 
 `;
 const StyledMenu = styled.ul`
-
+list-style : none;
   ${MenuItem}:hover & {
     visibility: ${({submenu}) => submenu && 'hidden'};
   }
