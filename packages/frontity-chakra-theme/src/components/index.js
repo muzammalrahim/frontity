@@ -12,7 +12,9 @@ import SearchResults from "./search";
 import Title from "./title";
 import FontFace from "./styles/font-face";
 import mainTheme from "./styles/wp-site/style.min.css";
+import baseTheme from "./styles/wp-site/base.min.css";
 import widgetCSS from "./styles/wp-site/widgets.min.css";
+import helperCSS from "./styles/wp-site/helpers.min.css";
 
 // Theme is the root React component of our theme. The one we will export
 // in roots.
@@ -30,7 +32,9 @@ const Theme = ({ state }) => {
   return (
     <ChakraProvider theme={{ ...overrides }}>
         <Global styles={css(mainTheme)} />
+        <Global styles={css(baseTheme)} />
       <Global styles={css(widgetCSS)} />
+      <Global styles={css(helperCSS)} />
       <FontFace />
       {/* Add some metatags to the <head> of the HTML. */}
       <Title />
@@ -48,6 +52,7 @@ const Theme = ({ state }) => {
         as="main"
         mt={{ base: "40px", md: "70px" }}
         minH="calc(100vh - 320px)"
+        className="block-head-1 magazine2"
       >
         <Switch>
           <Loading when={data.isFetching} />

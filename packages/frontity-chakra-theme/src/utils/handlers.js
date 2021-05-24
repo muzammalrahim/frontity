@@ -15,7 +15,7 @@ export const sidebar = {
       state
     });
 
-    console.log('siderbar: ', items);
+    // console.log('siderbar: ', items);
 
     // 3. add info to data
     Object.assign(state.source.data[route], {
@@ -24,3 +24,94 @@ export const sidebar = {
     });
   }
 };
+
+export const allCategories = {
+  name: "allCategories",
+  priority: 10,
+  pattern: "all-categories",
+  func: async ({ route, params, state, libraries }) => {
+    const { api } = libraries.source.api;
+
+    // 1. fetch the data you want from the endpoint page
+    const response = await libraries.source.api.get({
+      endpoint: "categories",
+      params: {
+        per_page: 100, // To make sure you get all of them
+        parent: 0
+      }
+    });
+
+    // 2. get an array with each item in json format
+    const items = await libraries.source.populate({
+      response: response,
+      state
+    });
+
+    // 3. add data to source
+    const currentPageData = state.source.data[route];
+
+    Object.assign(currentPageData, {
+      id: 1,
+      items: items
+    });
+  }
+};
+
+/*
+export const myCategoriesHandler = {
+  pattern: "/category/(.*)?/:slug",
+  func: async ({ route, params, state, libraries }) => {
+    // Get the page of the current route.
+    const { page } = libraries.source.parse(route);
+
+    // Get the id of the parent category.
+    const parentCatResponse = await libraries.source.api.get({
+      endpoint: "categories",
+      params: { slug: params.slug }
+    });
+    const [parentCat] = await libraries.source.populate({
+      state,
+      response: parentCatResponse
+    });
+
+    // Get the ids of all the child categories.
+    const childCatsResponse = await libraries.source.api.get({
+      endpoint: "categories",
+      params: { parent: parentCat.id }
+    });
+    const childCats = await libraries.source.populate({
+      state,
+      response: childCatsResponse
+    });
+    const ids = childCats.map(cat => cat.id);
+    ids.push(parentCat.id);
+
+    // Get the posts from those categories.
+    const postsResponse = await libraries.source.api.get({
+      endpoint: "posts",
+      params: {
+        categories: ids.join(","),
+        page,
+        per_page: 5,
+        _embed: true }
+    });
+    const items = await libraries.source.populate({
+      state,
+      response: postsResponse
+    });
+    const total = libraries.source.getTotal(postsResponse);
+    const totalPages = libraries.source.getTotalPages(postsResponse);
+
+    // Populate state.source.data with the proper info about this URL.
+    Object.assign(state.source.data[route], {
+      id: parentCat.id,
+      taxonomy: "category",
+      items,
+      total,
+      totalPages,
+      isArchive: true,
+      isTaxonomy: true,
+      isCategory: true
+    });
+  }
+};*/

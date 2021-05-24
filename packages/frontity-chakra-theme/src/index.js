@@ -2,17 +2,54 @@ import Theme from "./components";
 import image from "@frontity/html2react/processors/image";
 import processors from "./components/styles/processors";
 // import { theme } from "@chakra-ui/react";
-import { sidebar } from "./utils/handlers";
+import { sidebar, allCategories, myCategoriesHandler } from "./utils/handlers";
 
-const before = async ({ libraries, actions }) => {
+const before = async ({ libraries, actions, state }) => {
   // We use html2react to process the <img> tags inside the content HTML.
   // libraries.html2react.processors.push(image);
 
   // Add handlers for both /players/ and /players/:name.
   libraries.source.handlers.push(sidebar);
+  libraries.source.handlers.push(allCategories);
+  // libraries.source.handlers.push(myCategoriesHandler);
 
-  // Fetch all the players.
+  // Fetch.
   await actions.source.fetch("/sidebar/primary-widget-area");
+  await actions.source.fetch("all-categories");
+
+  // A handler example to retrieve posts
+  libraries.source.handlers.push({
+    name: "catPost",
+    priority: 11,
+    pattern: "/cat/:id/:page",
+    func: async ({ link, params, state, libraries, force }) => {
+      // 1. get product
+      const postsResponse = await libraries.source.api.get({
+        endpoint: "posts",
+         params: {
+          categories: params.id,
+          page: params.page,
+          per_page: 5,
+          _embed: true
+        }
+      });
+
+      const entitiesAdded = await libraries.source.populate({ response: postsResponse, state,  force });
+
+      // 3. add data to source
+      const currentPageData = state.source.data[link];
+
+      const total = libraries.source.getTotal(postsResponse);
+      const totalPages = libraries.source.getTotalPages(postsResponse);
+
+      Object.assign(currentPageData, {
+        id: 1,
+        items: entitiesAdded,
+        total,
+        totalPages
+      })
+    },
+  });
 };
 
 const chakraTheme = {
