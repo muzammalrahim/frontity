@@ -149,3 +149,24 @@ export function debounce(fn) {
     }
   ];
 }
+
+export const getCategoryPosts = async (catID, libraries, state, setData) => {
+
+  // Get other images
+  const postsResponse = await libraries.source.api.get({
+      endpoint: "posts",
+      params: {
+        categories: 51,
+        page: 1,
+        _embed: true
+      }
+    });
+
+  const entitiesAdded = await libraries.source.populate({ postsResponse, state });
+  // console.log('entitiesAdded: ',entitiesAdded);
+  await setData({
+    isReady: true,
+    items: entitiesAdded
+  });
+
+};
