@@ -112,6 +112,7 @@ const chakraTheme = {
         }
       },
       isSearchModalOpen: false,
+      subMenu: false,
       isMobileMenuOpen: false,
       autoPreFetch: "all"
     }
@@ -120,6 +121,10 @@ const chakraTheme = {
   // Frontity like libraries.
   actions: {
     theme: {
+      showSubmenu: ({ state }) => {
+        // state.theme.subMenu = !state.theme.subMenu;
+        state.theme.subMenu = true;
+      },
       openMobileMenu: ({ state }) => {
         state.theme.isMobileMenuOpen = true;
       },

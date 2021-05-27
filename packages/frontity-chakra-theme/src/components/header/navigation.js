@@ -3,6 +3,7 @@ import { styled } from "frontity";
 import React from "react";
 import FrontityLink from "../link";
 import { css } from "frontity";
+import { connect } from "frontity";
 
 const Link = styled(FrontityLink)`
   position: relative;
@@ -22,6 +23,7 @@ const Link = styled(FrontityLink)`
 
   &:hover {
     &:after {
+      <MenuItem2 isPostType={true}>
       bottom: -5px;
       background-color: ${p => p.theme.colors.accent[400]};
     }
@@ -78,8 +80,10 @@ const SiteMenuItem = ({ link, ...props }) => (
     position="relative"
     cursor="pointer"
     {...props}
+    
   >
-    <Link link={link}>{props.children}</Link>
+  
+    <Link  link={link}>{props.children}</Link>
   </Box>
 );
 
@@ -101,28 +105,36 @@ const SiteMenuItem2 = ({ link, ...props }) => (
   </Box>
 );
 
-const Navigation = ({ menu, ...props }) => (
+
+
+const Navigation = ({ menu,state,actions,...props }) =>
+{
+  
+  return(
+  
   <Box as="nav" width="100%" position="absolute" display={{ base: "none", lg: "block" }} {...props}>
     <SiteMenu>
- 
       {menu.map(({name, link,submenu}) => (
         <div class="mmenu" css={css`
-        position:relative;`
-      }>
-      <StyledMenu submenu={submenu}>
-        <SiteMenuItem  key={name} link={link}>
-          {name} 
-        </SiteMenuItem>
+        position:relative;` }>
 
+        <StyledMenu submenu={submenu}>
+        <SiteMenuItem  key={name} link={link} >
+        {name}
+        </SiteMenuItem>
+       
         <MenuItem2 submenu={submenu}>
          <MenuItem class="innermenu" key={name} css={css`
         position: absolute;
         top: 47px;
-        background: #000;
-        
-        `}>
-        { submenu &&  submenu.map(({name, link,}) => {
-          
+        background: #000; `}>
+        <h3   onFocus={() => {
+          actions.theme.showSubmenu()
+        }}   onBlur={(e)=>{actions.theme.showSubmenu()}}>
+                Change title
+            </h3>
+
+        { submenu && submenu.map(({name, link,}) => {
           return (
             
             <SiteMenuItem2 key={name} link={link}>
@@ -130,7 +142,7 @@ const Navigation = ({ menu, ...props }) => (
                              position : relative  
                           } `}>{name} 
                 </div>  
-            </SiteMenuItem2>            
+            </SiteMenuItem2>        
          );
         })
       } 
@@ -142,10 +154,9 @@ const Navigation = ({ menu, ...props }) => (
    
     </SiteMenu>
   </Box>
-);
+)};
 
-export default Navigation;
-
+export default connect(Navigation);
 
 
 const MenuItem = styled.ul`
@@ -161,14 +172,7 @@ position: absolute;
         top: 47px;
         background: #000;
         width:155px;
-        visibility: ${({submenu}) => submenu && 'visible'};
-
-        &: hover  {
-        visibility: ${({submenu}) => submenu && 'hidden'};
-     
-        }
-        &: focus  {
-        visibility: ${({submenu}) => submenu && 'hidden'};
+      visibility: ${(props) => (props.isPostType ? "visible" : "hidden")};
      
         }
 
