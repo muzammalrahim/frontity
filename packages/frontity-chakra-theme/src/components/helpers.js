@@ -30,13 +30,25 @@ export function getMediaAttributes(state, id) {
 
 export function getPostCategories(state, post) {
   const allCategories = state.source.category;
+  // console.log('postCat', post);
   const categories =
-    post.categories && post.categories.map(catId => allCategories[catId]);
+    post.categories && post.categories.map(
+        (catId, index) => {
+          if(Object.prototype.toString.call(post.categories[index]) === '[object Object]'){
+            console.log('object: ',post.categories[index].cat_ID);
+            return allCategories[post.categories[index].cat_ID];
+          }else{
+            return allCategories[catId];
+          }
+        });
+            // (Object.prototype.toString.call(allCategories[index]) === '[object Object]') ? post.categories[index].cat_ID : allCategories[catId]);
+  /*const categories =
+    post.categories && post.categories.map((catId, index) => console.log('obj: ', post.categories[index]));*/
   return categories ? categories.filter(Boolean) : [];
 }
 
 export function getPostAuthor(state, post) {
-  return state.source.author[post.author];
+  return post.author ? state.source.author[post.author] : state.source.author[post.meta.author] ;
 }
 
 export function getPostTags(state, post) {
@@ -56,23 +68,23 @@ export function formatPostData(state, post) {
     id: post.id,
     author: getPostAuthor(state, post),
     publishDate: post.date,
-    title: post.title.rendered,
+    title: post.title.rendered ? post.title.rendered : post.title,
     categories: getPostCategories(state, post),
     tags: getPostTags(state, post),
     link: post.link,
     featured_media: getMediaAttributes(state, post.featured_media),
-    content: post.content.rendered,
-    excerpt: post.excerpt.rendered
+    content: post.content.rendered ? post.content.rendered : post.content,
+    excerpt: post.excerpt.rendered ? post.excerpt.rendered : post.excerpt
   };
 }
 
-export function splitPosts(state, routeData) {
+export function splitPosts(state, routeData, splitCount) {
   const firstThreePosts = [];
   const otherPosts = [];
 
-  routeData.forEach((item, idx) => {
+  routeData && routeData.forEach((item, idx) => {
     const itemData = state.source[item.type][item.id];
-    if (idx < 3) firstThreePosts.push(itemData);
+    if (idx < splitCount) firstThreePosts.push(itemData);
     else otherPosts.push(itemData);
   });
 

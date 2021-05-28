@@ -6,17 +6,21 @@ import { formatDate } from "../helpers";
 import PostCategories from "../post/post-categories";
 import Image from "@frontity/components/image";
 
-const HomeCatPostPreview = ({ data, isFirst, ...rest }) => {
+const HomeResourcesPreview = ({ data, isFirst, ...rest }) => {
   const { title, excerpt, featured_media, link, categories, author, publishDate } = data;
+// console.log('categories: ', categories);
   return (
       <li className="post-item tie-standard">
 
-        {isFirst && <div className="big-thumb-left-box-inner"
-             style={{backgroundImage: 'url('+featured_media.src+')'}}>
-
+        {isFirst &&<>
+            <Link link={link} className="post-thumb">
+                  <Image sizes="(max-width: 1024px) 100vw, 1024px" src={featured_media.src} srcSet={featured_media.srcSet} className="attachment-jannah-image-small size-jannah-image-small tie-small-image wp-post-image" />
+              </Link>
           {/*<a aria-label={title}
-             href={link} className="post-thumb"></a>*/}
-            <Link link={link} className="post-thumb" />
+             href={link} className="post-thumb">
+              <Image sizes="(max-width: 1024px) 100vw, 1024px" src={featured_media.src} srcSet={featured_media.srcSet} className="attachment-jannah-image-post size-jannah-image-post wp-post-image"></Image>
+          </a>*/}
+            <div className="clearfix"></div>
 
           <div className="post-overlay">
             <div className="post-content">
@@ -24,7 +28,10 @@ const HomeCatPostPreview = ({ data, isFirst, ...rest }) => {
               {/*<a className="post-cat tie-cat-1"
                  href="https://seniorresourcehub.com/category/health-insurance/medicare/">Medicare</a>*/}
               <PostCategories justifyContent="flex-start" categories={categories} limit="1" />
-              <h2 className="post-title"><a href={link}>{title}</a></h2>
+              <h2 className="post-title">
+                  <Link link={link} dangerouslySetInnerHTML={{ __html: title}}  />
+                  {/*<a href={link}>{title}</a>*/}
+              </h2>
 
               <div className="thumb-meta">
                 <div className="post-meta clearfix">
@@ -43,26 +50,24 @@ const HomeCatPostPreview = ({ data, isFirst, ...rest }) => {
               </div>
             </div>
           </div>
-        </div>
+          </>
         }
           {!isFirst &&<>
               <Link link={link} className="post-thumb">
                   <Image sizes="(max-width: 1024px) 100vw, 1024px" src={featured_media.src} srcSet={featured_media.srcSet} className="attachment-jannah-image-small size-jannah-image-small tie-small-image wp-post-image" />
               </Link>
-              {/*<a aria-label={title}
-                 href={link} className="post-thumb">
-                  <Image sizes="(max-width: 1024px) 100vw, 1024px" src={featured_media.src} srcSet={featured_media.srcSet} className="attachment-jannah-image-small size-jannah-image-small tie-small-image wp-post-image" />
-              </a>*/}
-              <div className="post-details">
-                  <div className="post-meta clearfix">
+              <div className="post-overlay">
+                <div className="post-content">
+                    <div className="post-meta clearfix">
                       <span className="date meta-item tie-icon">{formatDate(publishDate)}</span>
-                  </div>
-                  <h2 className="post-title">
+                    </div>
+                    <h2 className="post-title">
                       <Link link={link} dangerouslySetInnerHTML={{ __html: title}}  />
                       {/*<a href={link}>
                           {title}
                       </a>*/}
-                  </h2>
+                    </h2>
+                </div>
               </div>
               </>
           }
@@ -70,4 +75,4 @@ const HomeCatPostPreview = ({ data, isFirst, ...rest }) => {
   );
 };
 
-export default HomeCatPostPreview;
+export default HomeResourcesPreview;

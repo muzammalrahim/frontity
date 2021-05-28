@@ -25,6 +25,44 @@ export const sidebar = {
   }
 };
 
+export const getAllPosts = {
+  name: "allPosts",
+  priority: 7,
+  pattern: "/all-posts/:categories/:page",
+  func: async ({ route, params, state, libraries }) => {
+    // 1. get all sidebars
+    const postResponse = await libraries.source.api.get({
+      endpoint: "posts",
+      params: {
+        categories: params.categories,
+        per_page: 4, // To make sure you get all of them
+        page: params.page,
+        _embed: true
+      }
+    });
+    //console.log('sidebarList: ', sidebarList);
+
+    // 2. add everything to the state.
+    const items = await libraries.source.populate({
+      response: postResponse,
+      state
+    });
+
+    // console.log('siderbar: ', items);
+
+    const total = libraries.source.getTotal(postResponse);
+    const totalPages = libraries.source.getTotalPages(postResponse);
+
+    // 3. add info to data
+    Object.assign(state.source.data[route], {
+      id: 1,
+      items: items,
+      totalPages,
+      total
+    });
+  }
+};
+
 export const allCategories = {
   name: "allCategories",
   priority: 10,
@@ -50,9 +88,14 @@ export const allCategories = {
     // 3. add data to source
     const currentPageData = state.source.data[route];
 
+    const total = libraries.source.getTotal(response);
+    const totalPages = libraries.source.getTotalPages(response);
+
     Object.assign(currentPageData, {
       id: 1,
-      items: items
+      items: items,
+      totalPages,
+      total
     });
   }
 };
