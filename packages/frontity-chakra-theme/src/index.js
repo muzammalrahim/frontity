@@ -113,6 +113,8 @@ const chakraTheme = {
       },
       isSearchModalOpen: false,
       subMenu: false,
+      shouldntHide: false,
+      subMenu: false,
       isMobileMenuOpen: false,
       autoPreFetch: "all"
     }
@@ -125,9 +127,24 @@ const chakraTheme = {
         // state.theme.subMenu = !state.theme.subMenu;
         state.theme.subMenu = true;
       },
+      shouldshowSubmenu: ({ state }) => value => {
+          if (value === "open")
+          {
+          state.theme.shouldntHide  = true;
+          }
+          else if (value === "closed")
+          {
+          state.theme.shouldntHide = false;
+          }
+      },
+     
+     
       hideSubmenu: ({ state }) => {
         // state.theme.subMenu = !state.theme.subMenu;
-        state.theme.subMenu = false;
+        if(!state.theme.shouldntHide)
+        {
+           state.theme.subMenu = false;
+          }
       },
       openMobileMenu: ({ state }) => {
         state.theme.isMobileMenuOpen = true;

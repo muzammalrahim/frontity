@@ -121,11 +121,11 @@ const Navigation = ({ menu,state,actions,...props }) =>
         <SiteMenuItem  key={name} link={link} >
         {submenu && <p  onMouseEnter={()=>{actions.theme.showSubmenu()}} onMouseLeave={()=>{setTimeout(() => {
           actions.theme.hideSubmenu()
-        }, 1000)    }} >  {name} </p>} {!submenu  &&<p> {name}</p> }
+        }, 2000)    }} >  {name} </p>} {!submenu  &&<p> {name}</p> }
         </SiteMenuItem>
        
         <MenuItem2 submenu={submenu}>
-         <MenuItem  class="innermenu" key={name} css={css`
+         <MenuItem  onMouseLeave={()=>{ actions.theme.shouldshowSubmenu("closed"), actions.theme.hideSubmenu()}} class="innermenu" key={name} css={css`
         position: absolute;
         top: 47px;
         background: #000; `}>
@@ -136,9 +136,9 @@ const Navigation = ({ menu,state,actions,...props }) =>
         { (state.theme.subMenu && submenu) && submenu.map(({name, link,}) => {
           return (
             
-            <SiteMenuItem2 key={name} link={link}   onMouseEnter={()=>{actions.theme.showSubmenu("notTrigeer")}} onMouseLeave={()=>{setTimeout(() => {
-              actions.theme.hideSubmenu()
-            }, 1000)    }}>
+            <SiteMenuItem2 key={name} link={link}   onMouseEnter={()=>{actions.theme.shouldshowSubmenu("open")}} 
+            
+            >
                 <div  css={css` 
                              position : relative  
                           } `}>{name} 
