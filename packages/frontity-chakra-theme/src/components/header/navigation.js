@@ -119,9 +119,12 @@ const Navigation = ({ menu,state,actions,...props }) =>
         <StyledMenu submenu={submenu}>
 
         <SiteMenuItem  key={name} link={link} >
-        {submenu && <p  onMouseEnter={()=>{actions.theme.showSubmenu()}} onMouseLeave={()=>{setTimeout(() => {
-          actions.theme.hideSubmenu()
-        }, 2000)    }} >  {name} </p>} {!submenu  &&<p> {name}</p> }
+        {submenu && <p  onMouseEnter={()=>{actions.theme.showSubmenu(),actions.theme.showcurrentSubMenu(name)}} 
+                        onMouseLeave={()=>{setTimeout(() => {
+                                                               actions.theme.hideSubmenu()
+                                                             }, 500)    }} >  {name} 
+                    </p>} {!submenu  &&<p> {name}</p> }
+
         </SiteMenuItem>
        
         <MenuItem2 submenu={submenu}>
@@ -133,7 +136,7 @@ const Navigation = ({ menu,state,actions,...props }) =>
 
            
 
-        { (state.theme.subMenu && submenu) && submenu.map(({name, link,}) => {
+        { (state.theme.subMenu && submenu && state.theme.currentSubMenu === name) && submenu.map(({name, link,}) => {
           return (
             
             <SiteMenuItem2 key={name} link={link}   onMouseEnter={()=>{actions.theme.shouldshowSubmenu("open")}} 

@@ -21,6 +21,24 @@ const settings = {
             {
               name: 'Health Insurance',
               link: '/category/health-insurance/',
+              submenu: [
+                {
+                  name: 'Dental',
+                  link: '/category/health-insurance/dental/'
+                },
+                {
+                  name: 'Disability',
+                  link: '/category/health-insurance/disability/'
+                },
+                {
+                  name: 'Medicaid',
+                  link: '/category/health-insurance/medicaid/'
+                },
+                {
+                  name: 'medicare',
+                  link: '/category/health-insurance/medicare/'
+                }
+              ]
             },
             {
               name: 'Money and Finance',

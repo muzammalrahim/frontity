@@ -113,6 +113,7 @@ const chakraTheme = {
       },
       isSearchModalOpen: false,
       subMenu: false,
+      currentSubMenu: "",
       shouldntHide: false,
       subMenu: false,
       isMobileMenuOpen: false,
@@ -136,6 +137,11 @@ const chakraTheme = {
           {
           state.theme.shouldntHide = false;
           }
+      },
+      showcurrentSubMenu: ({ state }) => value => {
+         
+          state.theme.currentSubMenu  = value;
+     
       },
      
      
