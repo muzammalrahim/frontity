@@ -151,6 +151,7 @@ const chakraTheme = {
         {
            state.theme.subMenu = false;
           }
+          
       },
       openMobileMenu: ({ state }) => {
         state.theme.isMobileMenuOpen = true;

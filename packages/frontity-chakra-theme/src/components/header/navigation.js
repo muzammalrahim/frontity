@@ -118,11 +118,11 @@ const Navigation = ({ menu,state,actions,...props }) =>
         position:relative;` }>
         <StyledMenu submenu={submenu}>
 
-        <SiteMenuItem  key={name} link={link} >
-        {submenu && <p  onMouseEnter={()=>{actions.theme.showSubmenu(),actions.theme.showcurrentSubMenu(name)}} 
-                        onMouseLeave={()=>{setTimeout(() => {
+        <SiteMenuItem  key={name} link={link}  onMouseLeave={()=>{setTimeout(() => {
                                                                actions.theme.hideSubmenu()
-                                                             }, 500)    }} >  {name} 
+                                                             }, 200)   }} >
+        {submenu && <p  onMouseOver={()=>{actions.theme.showSubmenu(),actions.theme.showcurrentSubMenu(name)}} 
+                        >  {name} 
                     </p>} {!submenu  &&<p> {name}</p> }
 
         </SiteMenuItem>
@@ -134,7 +134,7 @@ const Navigation = ({ menu,state,actions,...props }) =>
         background: #000; `}>
         
 
-           
+         {console.log("wai",state.theme.subMenu)}  
 
         { (state.theme.subMenu && submenu && state.theme.currentSubMenu === name) && submenu.map(({name, link,}) => {
           return (

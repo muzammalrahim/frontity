@@ -40,11 +40,7 @@ const settings = {
                 }
               ]
             },
-            {
-              name: 'Money and Finance',
-              link: '/category/senior-resources/money-and-finance/',
-              
-            },
+         
 			      {
               name: 'Money and Finance',
               link: '/category/senior-resources/money-and-finance/',
