@@ -23,7 +23,6 @@ const Link = styled(FrontityLink)`
 
   &:hover {
     &:after {
-      <MenuItem2 isPostType={true}>
       bottom: -5px;
       background-color: ${p => p.theme.colors.accent[400]};
     }
@@ -115,30 +114,32 @@ const Navigation = ({ menu,state,actions,...props }) =>
   <Box as="nav" width="100%" position="absolute" display={{ base: "none", lg: "block" }} {...props}>
     <SiteMenu>
       {menu.map(({name, link,submenu}) => (
-        <div class="mmenu" css={css`
+        <div  class="mmenu" css={css`
         position:relative;` }>
-
         <StyledMenu submenu={submenu}>
+
         <SiteMenuItem  key={name} link={link} >
-        {name}
+        {submenu && <p  onMouseEnter={()=>{actions.theme.showSubmenu()}} onMouseLeave={()=>{setTimeout(() => {
+          actions.theme.hideSubmenu()
+        }, 1000)    }} >  {name} </p>} {!submenu  &&<p> {name}</p> }
         </SiteMenuItem>
        
         <MenuItem2 submenu={submenu}>
-         <MenuItem class="innermenu" key={name} css={css`
+         <MenuItem  class="innermenu" key={name} css={css`
         position: absolute;
         top: 47px;
         background: #000; `}>
-        <h3   onFocus={() => {
-          actions.theme.showSubmenu()
-        }}   onBlur={(e)=>{actions.theme.showSubmenu()}}>
-                Change title
-            </h3>
+        
 
-        { submenu && submenu.map(({name, link,}) => {
+           
+
+        { (state.theme.subMenu && submenu) && submenu.map(({name, link,}) => {
           return (
             
-            <SiteMenuItem2 key={name} link={link}>
-                <div css={css` 
+            <SiteMenuItem2 key={name} link={link}   onMouseEnter={()=>{actions.theme.showSubmenu("notTrigeer")}} onMouseLeave={()=>{setTimeout(() => {
+              actions.theme.hideSubmenu()
+            }, 1000)    }}>
+                <div  css={css` 
                              position : relative  
                           } `}>{name} 
                 </div>  
@@ -148,6 +149,7 @@ const Navigation = ({ menu,state,actions,...props }) =>
       } 
         </MenuItem>
       </MenuItem2>
+   
       </StyledMenu>
       </div>
       ))}
@@ -172,13 +174,16 @@ position: absolute;
         top: 47px;
         background: #000;
         width:155px;
-      visibility: ${(props) => (props.isPostType ? "visible" : "hidden")};
+    
      
-        }
+        visibility: visible
 
       
 
 `;
+
+
+// visibility: ${(props) => (props.isPostType ? "visible" : "hidden")};
 const StyledMenu = styled.ul`
 list-style : none;
   ${MenuItem}:hover & {

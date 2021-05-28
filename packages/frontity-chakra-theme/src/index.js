@@ -125,6 +125,10 @@ const chakraTheme = {
         // state.theme.subMenu = !state.theme.subMenu;
         state.theme.subMenu = true;
       },
+      hideSubmenu: ({ state }) => {
+        // state.theme.subMenu = !state.theme.subMenu;
+        state.theme.subMenu = false;
+      },
       openMobileMenu: ({ state }) => {
         state.theme.isMobileMenuOpen = true;
       },
