@@ -93,10 +93,6 @@ const Content = styled.div`
     max-width: 100%;
   }
 
-  ul {
-    padding: 1rem;
-  }
-
   img {
     width: 100%;
     object-fit: cover;
@@ -162,6 +158,25 @@ const Content = styled.div`
     color: #fff;
     background-color: #1f38c5;
   }
+    ul {
+    padding: 1rem;
+  }
+  a {
+    color: #08f; 
+    text-decoration-color: white;
+
+    &:hover {
+      color: #006dcc;
+      text-decoration-color: white;
+      &:focus {
+        color: #006dcc;
+        text-decoration-color: white;
+      }
+    }
+}
+
+
+
 
   /* WordPress Core Align Classes */
 
