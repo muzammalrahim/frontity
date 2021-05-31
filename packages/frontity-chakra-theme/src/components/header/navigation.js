@@ -142,7 +142,9 @@ const Navigation = ({ menu,state,actions,...props }) =>
             >
                 <div  css={css` 
                              position : relative  
-                          } `}>{name} 
+                          } `}
+                >
+                {name} 
                 </div>  
             </SiteMenuItem2>        
          );

@@ -33,6 +33,7 @@ const Post = ({ state, actions, libraries }) => {
 
   return (
     <LightPatternBox showPattern={state.theme.showBackgroundPattern} ref={ref}>
+    
       <Box pb={{ base: "2rem", lg: "50px" }}>
         <PostHeader
           mt={{ base: "20px", lg: "4rem" }}
@@ -76,6 +77,7 @@ const Post = ({ state, actions, libraries }) => {
         </Section>
       </Section>
     </LightPatternBox>
+
   );
 };
 
