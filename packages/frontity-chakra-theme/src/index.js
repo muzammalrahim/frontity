@@ -112,6 +112,10 @@ const chakraTheme = {
         }
       },
       isSearchModalOpen: false,
+      subMenu: false,
+      currentSubMenu: "",
+      shouldntHide: false,
+      subMenu: false,
       isMobileMenuOpen: false,
       autoPreFetch: "all"
     }
@@ -120,6 +124,35 @@ const chakraTheme = {
   // Frontity like libraries.
   actions: {
     theme: {
+      showSubmenu: ({ state }) => {
+        // state.theme.subMenu = !state.theme.subMenu;
+        state.theme.subMenu = true;
+      },
+      shouldshowSubmenu: ({ state }) => value => {
+          if (value === "open")
+          {
+          state.theme.shouldntHide  = true;
+          }
+          else if (value === "closed")
+          {
+          state.theme.shouldntHide = false;
+          }
+      },
+      showcurrentSubMenu: ({ state }) => value => {
+         
+          state.theme.currentSubMenu  = value;
+     
+      },
+     
+     
+      hideSubmenu: ({ state }) => {
+        // state.theme.subMenu = !state.theme.subMenu;
+        if(!state.theme.shouldntHide)
+        {
+           state.theme.subMenu = false;
+          }
+          
+      },
       openMobileMenu: ({ state }) => {
         state.theme.isMobileMenuOpen = true;
       },

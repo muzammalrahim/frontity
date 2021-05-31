@@ -3,6 +3,7 @@ import { styled } from "frontity";
 import React from "react";
 import FrontityLink from "../link";
 import { css } from "frontity";
+import { connect } from "frontity";
 
 const Link = styled(FrontityLink)`
   position: relative;
@@ -78,8 +79,10 @@ const SiteMenuItem = ({ link, ...props }) => (
     position="relative"
     cursor="pointer"
     {...props}
+    
   >
-    <Link link={link}>{props.children}</Link>
+  
+    <Link  link={link}>{props.children}</Link>
   </Box>
 );
 
@@ -101,51 +104,64 @@ const SiteMenuItem2 = ({ link, ...props }) => (
   </Box>
 );
 
-const Navigation = ({ menu, ...props }) => (
+
+
+const Navigation = ({ menu,state,actions,...props }) =>
+{
+  
+  return(
+  
   <Box as="nav" width="100%" position="absolute" display={{ base: "none", lg: "block" }} {...props}>
     <SiteMenu>
- 
       {menu.map(({name, link,submenu}) => (
-        <div class="mmenu" css={css`
-        position:relative;`
-      }>
-      <StyledMenu submenu={submenu}>
-        <SiteMenuItem  key={name} link={link}>
-          {name} 
-        </SiteMenuItem>
+        <div  class="mmenu" css={css`
+        position:relative;` }>
+        <StyledMenu submenu={submenu}>
 
+        <SiteMenuItem  key={name} link={link}  onMouseLeave={()=>{setTimeout(() => {
+                                                               actions.theme.hideSubmenu()
+                                                             }, 200)   }} >
+        {submenu && <p  onMouseOver={()=>{actions.theme.showSubmenu(),actions.theme.showcurrentSubMenu(name)}} 
+                        >  {name} 
+                    </p>} {!submenu  &&<p> {name}</p> }
+
+        </SiteMenuItem>
+       
         <MenuItem2 submenu={submenu}>
-         <MenuItem class="innermenu" key={name} css={css`
+         <MenuItem  onMouseLeave={()=>{ actions.theme.shouldshowSubmenu("closed"), actions.theme.hideSubmenu()}} class="innermenu" key={name} css={css`
         position: absolute;
         top: 47px;
-        background: #000;
+        background: #000; `}>
         
-        `}>
-        { submenu &&  submenu.map(({name, link,}) => {
-          
+
+         {console.log("wai",state.theme.subMenu)}  
+
+        { (state.theme.subMenu && submenu && state.theme.currentSubMenu === name) && submenu.map(({name, link,}) => {
           return (
             
-            <SiteMenuItem2 key={name} link={link}>
-                <div css={css` 
+            <SiteMenuItem2 key={name} link={link}   onMouseEnter={()=>{actions.theme.shouldshowSubmenu("open")}} 
+            
+            >
+                <div  css={css` 
                              position : relative  
                           } `}>{name} 
                 </div>  
-            </SiteMenuItem2>            
+            </SiteMenuItem2>        
          );
         })
       } 
         </MenuItem>
       </MenuItem2>
+   
       </StyledMenu>
       </div>
       ))}
    
     </SiteMenu>
   </Box>
-);
+)};
 
-export default Navigation;
-
+export default connect(Navigation);
 
 
 const MenuItem = styled.ul`
@@ -161,20 +177,16 @@ position: absolute;
         top: 47px;
         background: #000;
         width:155px;
-        visibility: ${({submenu}) => submenu && 'visible'};
-
-        &: hover  {
-        visibility: ${({submenu}) => submenu && 'hidden'};
+    
      
-        }
-        &: focus  {
-        visibility: ${({submenu}) => submenu && 'hidden'};
-     
-        }
+        visibility: visible
 
       
 
 `;
+
+
+// visibility: ${(props) => (props.isPostType ? "visible" : "hidden")};
 const StyledMenu = styled.ul`
 list-style : none;
   ${MenuItem}:hover & {
