@@ -134,8 +134,6 @@ const Navigation = ({ menu,state,actions,...props }) =>
         background: #000; `}>
         
 
-         {console.log("wai",state.theme.subMenu)}  
-
         { (state.theme.subMenu && submenu && state.theme.currentSubMenu === name) && submenu.map(({name, link,}) => {
           return (
             
