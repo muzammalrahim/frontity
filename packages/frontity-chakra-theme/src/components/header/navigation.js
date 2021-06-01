@@ -4,6 +4,7 @@ import React from "react";
 import FrontityLink from "../link";
 import { css } from "frontity";
 import { connect } from "frontity";
+import { TriangleDownIcon } from "@chakra-ui/icons";
 
 const Link = styled(FrontityLink)`
   position: relative;
@@ -121,9 +122,9 @@ const Navigation = ({ menu,state,actions,...props }) =>
         <SiteMenuItem  key={name} link={link}  onMouseLeave={()=>{setTimeout(() => {
                                                                actions.theme.hideSubmenu()
                                                              }, 500)   }} >
-        {submenu && <p  onPointerMove={()=>{actions.theme.showSubmenu(),actions.theme.showcurrentSubMenu(name)}} 
+        {submenu && <span  onPointerMove={()=>{actions.theme.showSubmenu(),actions.theme.showcurrentSubMenu(name)}} 
                         >  {name} 
-                    </p>} {!submenu  &&<p> {name}</p> }
+                        <TriangleDownIcon mb={1} ml={1} w={3} h={3}/> </span>} {!submenu  &&<p> {name}</p> }
 
         </SiteMenuItem>
        
