@@ -1,6 +1,6 @@
 import { Box, Heading, SimpleGrid, Button } from "@chakra-ui/react";
 import { connect } from "frontity";
-import {React, useEffect, useState} from "react";
+import {React, useEffect, useState, useRef} from "react";
 import {FeaturedPostSection, SecondaryPostPreview} from "../featured-post/featured-post";
 import { formatPostData, splitPosts, getCategoryPosts, getPostCategories } from "../helpers";
 import { Newsletter } from "../newsletter";
@@ -8,21 +8,33 @@ import HomeArchiveItem from "./home-archive-item";
 import { PaginationButton } from "./pagination";
 import HomeCatPostPreview from "./home-cat-post-preview";
 import HomeResourcesPreview from "./home-resources-preview";
+import HomePopularSlider from "../../components/sliders/home-popular-slider";
 import Link from "../link";
 import Slider from "react-slick";
+
 
 const HomepageArchive = ({ actions, state, libraries }) => {
   // Get the data of the current list.
   const data = state.source.get(state.router.link);
   const allCats = state.source.get('all-categories');
+  let slider = useRef(null);
 
   const settings = {
-      dots: true,
       infinite: true,
       speed: 500,
-      slidesToShow: 2,
-      slidesToScroll: 2
+      slidesToShow: 1,
+      arrows:false,
+      slidesToScroll: 1,
+      slide: '.slide',
+      className: 'tie-slick-slider',
   };
+
+  const nextSlide = () =>  {
+    slider.slickNext();
+  }
+  const previousSlide = () => {
+    slider.slickPrev();
+  }
 
   const catIds = allCats.items.filter(cat => {
       if(cat.id !== 3){
@@ -179,7 +191,8 @@ const HomepageArchive = ({ actions, state, libraries }) => {
 // console.log('data: ',catOneHeading);
   const [firstThreePosts, othersPosts] = splitPosts(state, data.items, 3);
   const [popularTopics, notRequiredTopics] = splitPosts(state, allResourcesPosts?allResourcesPosts.items : [], 4);
-console.log('popularTopics : ', popularTopics);
+  const [popularSlidesPageOne, popularSlidesPageTwo] = splitPosts(state, popularTopics? popularTopics : [], 2);
+// console.log('popularTopics : ', popularTopics);
   return (
     <Box bg="white" as="section">
       <FeaturedPostSection
@@ -237,9 +250,9 @@ console.log('popularTopics : ', popularTopics);
                                               const postData = formatPostData(state, item);
                                               //console.log('pstData ', postData);
                                               if (index == 0 && healthInsPosts.items.length > 0) {
-                                                  return <HomeCatPostPreview data={postData} isFirst={true}/>
+                                                  return <HomeCatPostPreview key={id} data={postData} isFirst={true}/>
                                               } else {
-                                                  return <HomeCatPostPreview data={postData}/>;
+                                                  return <HomeCatPostPreview key={id} data={postData}/>;
                                               }
                                               // return <HomeArchiveItem key={item.id} item={item} />;
                                           })}
@@ -287,7 +300,7 @@ console.log('popularTopics : ', popularTopics);
                                               /*if (index == 0 && financePosts.items.length > 0) {
                                                   return <HomeCatPostPreview data={postData} isFirst={true}/>
                                               } else {*/
-                                                  return <HomeCatPostPreview data={postData}/>;
+                                                  return <HomeCatPostPreview key={id} data={postData}/>;
                                               // }
                                               // return <HomeArchiveItem key={item.id} item={item} />;
                                           })}
@@ -335,7 +348,7 @@ console.log('popularTopics : ', popularTopics);
                                               /*if (index == 0 && seniorResPosts.items.length > 0) {
                                                   return <HomeCatPostPreview data={postData} isFirst={true}/>
                                               } else {*/
-                                                  return <HomeCatPostPreview data={postData}/>;
+                                                  return <HomeCatPostPreview key={id} data={postData}/>;
                                               // }
                                               // return <HomeArchiveItem key={item.id} item={item} />;
                                           })}
@@ -372,20 +385,31 @@ console.log('popularTopics : ', popularTopics);
                                   <div className="slider-area-inner">
                                       <div id="tie-main-slider-9-block_3032"
                                            className="tie-main-slider main-slider grid-2-big boxed-slider grid-slider-wrapper tie-slick-slider-wrapper">
-
-                                          <Slider {...settings}>
-                                              {popularTopics && popularTopics.map(({type, id}, index) => {
-                                                  const item = state.source[type][id];
-                                                  if(item){
-                                                      const postData = formatPostData(state, item);
-                                                      if (index == 0 && popularTopics.length > 0) {
-                                                          return <HomeResourcesPreview data={postData} isFirst={true}/>
-                                                      } else {
-                                                          return <HomeResourcesPreview data={postData}/>;
+                                          <div className="main-slider-inner">
+                                              <ul className="tie-slider-nav">
+                                                  <li className="slick-arrow">
+                                                      <span className="tie-icon-angle-left" onClick={previousSlide} />
+                                                  </li>
+                                                  <li className="slick-arrow">
+                                                      <span className="tie-icon-angle-right" onClick={nextSlide} />
+                                                  </li>
+                                              </ul>
+                                              <Slider ref={c => (slider = c)} {...settings}>
+                                                  {popularSlidesPageOne && (
+                                                      <HomePopularSlider state={state} data={popularSlidesPageOne} />
+                                                  )}
+                                                  {popularSlidesPageTwo && (
+                                                      <HomePopularSlider state={state} data={popularSlidesPageTwo} />
+                                                  )}
+                                                  {/*{popularTopics && popularTopics.map(({type, id}, index) => {
+                                                      const item = state.source[type][id];
+                                                      if(item){
+                                                          const postData = formatPostData(state, item);
+                                                          return <HomePopularSlider key={id} data={postData}/>;
                                                       }
-                                                  }
-                                              })}
-                                          </Slider>
+                                                  })}*/}
+                                              </Slider>
+                                          </div>
                                       </div>
                                   </div>
                           </div>
@@ -441,9 +465,9 @@ console.log('popularTopics : ', popularTopics);
                                               if(item){
                                                   const postData = formatPostData(state, item);
                                                   if (index == 0 && allResourcesPosts.items.length > 0) {
-                                                      return <HomeResourcesPreview data={postData} isFirst={true}/>
+                                                      return <HomeResourcesPreview key={id} data={postData} isFirst={true}/>
                                                   } else {
-                                                      return <HomeResourcesPreview data={postData}/>;
+                                                      return <HomeResourcesPreview key={id} data={postData}/>;
                                                   }
                                               }
                                           })}
@@ -488,7 +512,7 @@ console.log('popularTopics : ', popularTopics);
                                               const item = state.source[type][id];
                                               const postData = formatPostData(state, item);
                                               //console.log('pstData ', postData);
-                                              return <HomeCatPostPreview data={postData}/>;
+                                              return <HomeCatPostPreview key={id} data={postData}/>;
                                               // return <HomeArchiveItem key={item.id} item={item} />;
                                           })}
                                       </ul>
@@ -537,7 +561,7 @@ console.log('popularTopics : ', popularTopics);
                                                           const postData = formatPostData(state, item);
                                                          return (
                                                              <>
-                                                                <HomeCatPostPreview data={postData}/>
+                                                                <HomeCatPostPreview key={id} data={postData}/>
                                                              </>
                                                          )
                                                       })}
