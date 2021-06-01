@@ -1,4 +1,3 @@
-import { Box, Divider } from "@chakra-ui/react";
 import { connect, styled } from "frontity";
 import React, { useEffect } from "react";
 import List from "../archive";
@@ -11,9 +10,14 @@ import PostHeader from "./post-header";
 import PostProgressBar from "./post-progressbar";
 import { getPostData, formatPostData } from "../helpers";
 
+import { Box, Divider,SimpleGrid, Flex  } from "@chakra-ui/react";
+import Sidebar from "../sidebar";
+import { useMediaQuery } from "@chakra-ui/react"
+
 const Post = ({ state, actions, libraries }) => {
   const postData = getPostData(state);
   const post = formatPostData(state, postData);
+  const [_isSmallerThan900] = useMediaQuery("(max-width: 900px)")
 
   // Get the html2react component.
   const Html2React = libraries.html2react.Component;
@@ -32,8 +36,17 @@ const Post = ({ state, actions, libraries }) => {
   if (!postData.isReady) return null;
 
   return (
+    <Box  px={{ base: "124px", lg: "140px" }}>
+    <Flex p="40px"  flexGrow="1" direction={_isSmallerThan900 ?"column": "row"} >
+    <Box
+    padding={{ base: "24px", lg: "40px" }}
+    // bg="white"
+    width={_isSmallerThan900 ?{ lg: "100%" } :{ lg: "75%" }}
+    maxWidth="1200px"
+    mx="auto" 
+    >
     <LightPatternBox showPattern={state.theme.showBackgroundPattern} ref={ref}>
-    
+ 
       <Box pb={{ base: "2rem", lg: "50px" }}>
         <PostHeader
           mt={{ base: "20px", lg: "4rem" }}
@@ -45,15 +58,16 @@ const Post = ({ state, actions, libraries }) => {
           isPage={postData.isPage}
         />
       </Box>
+     
 
       {!postData.isPage && <PostProgressBar value={scroll} />}
 
       {/* Look at the settings to see if we should include the featured image */}
-      <Section bg="white" pb="80px" size="lg">
+      <Section  pb="80px" size="lg">
         {post.featured_media != null && (
           <FeaturedMedia id={post.featured_media.id} />
         )}
-
+     
         {/* Render the content using the Html2React component so the HTML is processed
        by the processors we included in the libraries.html2react.processors array. */}
         <Content
@@ -62,6 +76,7 @@ const Post = ({ state, actions, libraries }) => {
           size="md"
           pt="50px"
         >
+    
           <Html2React html={post.content} />
         </Content>
 
@@ -77,6 +92,16 @@ const Post = ({ state, actions, libraries }) => {
         </Section>
       </Section>
     </LightPatternBox>
+      </Box>
+      <Box  
+            width={_isSmallerThan900 ?{ lg: "100%" } :{ lg: "25%" }}
+            padding={{ base: "24px", lg: "40px" }} 
+            // bg="white"
+        >
+            <Sidebar/>
+        </Box>
+      </Flex>
+    </Box>
 
   );
 };

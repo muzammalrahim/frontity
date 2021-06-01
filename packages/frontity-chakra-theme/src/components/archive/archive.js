@@ -7,7 +7,7 @@ import HomepageArchive from "./homepage-archive";
 import Sidebar from "./../sidebar";
 import Pagination from "./pagination";
 import { decode } from "frontity";
- import { useMediaQuery } from "@chakra-ui/react"
+import { useMediaQuery } from "@chakra-ui/react"
 
 const Archive = ({ state }) => {
   // Get the data of the current list.
@@ -67,7 +67,7 @@ const Archive = ({ state }) => {
             bg="white">
             <Sidebar/>
         </Box>
-        </Flex>
+      </Flex>
     </Box>
   );
 };
