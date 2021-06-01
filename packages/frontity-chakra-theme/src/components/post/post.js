@@ -15,16 +15,16 @@ import Sidebar from "../sidebar";
 import { useMediaQuery } from "@chakra-ui/react"
 
 const Post = ({ state, actions, libraries }) => {
-  const postData = getPostData(state);
-  const post = formatPostData(state, postData);
-  const [_isSmallerThan900] = useMediaQuery("(max-width: 900px)")
+const postData = getPostData(state);
+const post = formatPostData(state, postData);
+const [_isSmallerThan900] = useMediaQuery("(max-width: 900px)")
 
-  // Get the html2react component.
-  const Html2React = libraries.html2react.Component;
+// Get the html2react component.
+const Html2React = libraries.html2react.Component;
 
-  // Once the post has loaded in the DOM, prefetch both the
-  // home posts and the list component so if the user visits
-  // the home page, everything is ready and it loads instantly.
+// Once the post has loaded in the DOM, prefetch both the
+// home posts and the list component so if the user visits
+// the home page, everything is ready and it loads instantly.
   useEffect(() => {
     actions.source.fetch("/");
     List.preload();
