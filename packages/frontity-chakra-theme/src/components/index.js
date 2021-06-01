@@ -53,6 +53,7 @@ const Theme = ({ state }) => {
         mt={{ base: "40px", md: "70px" }}
         minH="calc(100vh - 320px)"
         className="block-head-1 magazine2" 
+        bg="#ffffff"
       >
         <Switch>
           <Loading when={data.isFetching} />
