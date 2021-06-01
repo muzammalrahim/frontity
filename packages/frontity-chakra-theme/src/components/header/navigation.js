@@ -120,7 +120,7 @@ const Navigation = ({ menu,state,actions,...props }) =>
 
         <SiteMenuItem  key={name} link={link}  onMouseLeave={()=>{setTimeout(() => {
                                                                actions.theme.hideSubmenu()
-                                                             }, 300)   }} >
+                                                             }, 500)   }} >
         {submenu && <p  onPointerMove={()=>{actions.theme.showSubmenu(),actions.theme.showcurrentSubMenu(name)}} 
                         >  {name} 
                     </p>} {!submenu  &&<p> {name}</p> }
