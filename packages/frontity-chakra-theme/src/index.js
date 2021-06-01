@@ -99,7 +99,9 @@ const chakraTheme = {
           900: "#272727"
         },
         accent: {
-          50: "#ede4d3",
+          // theme default 50
+          // 50: "#ede4d3",
+          50: "#ffffff",
           100: "#fbe3b2",
           200: "#f6d086",
           300: "#f1be58",
