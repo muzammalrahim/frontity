@@ -43,7 +43,9 @@ const PostPreview = ({ data, ...rest }) => {
           </Text>
         </Flex>
      
-       <Heading fontSize="20px" fontFamily="Poppins"  as="h4" textTransform="uppercase">  
+       <Heading fontSize="20px" fontFamily="Poppins"  as="h4" 
+      //  textTransform="uppercase"
+       >  
        <StyledDiv>  <Link  link={link}>{title}</Link>   </StyledDiv>
       </Heading>
   

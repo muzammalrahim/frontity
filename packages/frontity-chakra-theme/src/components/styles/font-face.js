@@ -3,7 +3,9 @@ import { Global, css } from "frontity";
 import kelsonBoldWOFF from "../../fonts/KelsonSans-Bold.woff";
 import kelsonBoldTTF from "../../fonts/KelsonSans-Bold.ttf";
 
-import PoppinsRegular from "../../fonts/KelsonSans-Bold.ttf";
+
+import poppinsfontTTF from "../../fonts/poppins-fonts/webfonts/Poppins-Bold.ttf";
+import poppinsfontWOFF from "../../fonts/poppins-fonts/webfonts/Poppins-Bold.woff";
 
 import tielabsfontTTF from "../../fonts/tielabs-fonticon/tielabs-fonticon.ttf";
 import tielabsfontWOFF from "../../fonts/tielabs-fonticon/tielabs-fonticon.woff";
@@ -21,7 +23,8 @@ const FontFace = () => (
       }
       @font-face {
         font-family: "Poppins";
-        src: url(${kelsonBoldTTF}) format("ttf");
+        src: url(${poppinsfontWOFF}) format("ttf");
+        url(${poppinsfontTTF}) format("ttf");
         font-weight: 700;
         font-display: swap;
       }
