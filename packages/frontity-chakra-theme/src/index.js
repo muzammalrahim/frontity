@@ -16,7 +16,9 @@ const before = async ({ libraries, actions, state }) => {
   // libraries.source.handlers.push(myCategoriesHandler);
 
   // Fetch.
-  await actions.source.fetch("/sidebar/primary-widget-area");
+  await actions.source.fetch("/sidebar/primary-widget-area/1");
+  await actions.source.fetch("/sidebar/tiepost-1020-section-749/2");
+  await actions.source.fetch("/sidebar/tiepost-1020-section-6559/3");
   await actions.source.fetch("all-categories");
   // await actions.source.fetch("/all-posts");
 

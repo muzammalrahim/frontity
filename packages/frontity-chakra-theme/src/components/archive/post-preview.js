@@ -34,8 +34,8 @@ const PostPreview = ({ data, ...rest }) => {
       <Flex py="40px" pl="10px" pr="0px"  flexGrow="1" direction="column" width={isSmallerThan800 ?"100%":"50%"} >
         <Flex direction="row" mb="5px">
           <Text fontSize="sm">
-            <Link color="#767676" link={data.author.link}>
-              {decode(data.author.name)}
+            <Link color="#767676" link={data?.author?.link}>
+              {decode(data?.author?.name)}
             </Link>
           </Text>
           <Text fontSize="sm" color="#767676" ml="12px">

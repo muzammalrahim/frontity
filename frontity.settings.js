@@ -43,47 +43,47 @@ const settings = {
          
 			      {
               name: 'Money and Finance',
-              link: '/category/senior-resources/money-and-finance/',
+              link: '/category/money-and-finance/',
               submenu: [
                 {
                   name: 'Real Estate Investment Trusts',
-                  link: '/category/finance/real-estate-investment-trusts/'
+                  link: '/category/money-and-finance/real-estate-investment-trusts/'
                 },
                 {
                   name: 'Dividend Paying Stocks',
-                  link: '/category/finance/dividend-paying-stocks/'
+                  link: '/category/money-and-finance/dividend-paying-stocks/'
                 },
                 {
                   name: 'Cryptocurrency Investments',
-                  link: '/category/finance/cryptocurrency-investments/'
+                  link: '/category/money-and-finance/cryptocurrency-investments/'
                 },
                 {
                   name: 'Loans and Credit Lines',
-                  link: '/category/finance/lending-options/'
+                  link: '/category/money-and-finance/lending-options/'
                 },
                 {
                   name: 'Reverse Mortgage',
-                  link: '/category/finance/reverse-mortgage/'
+                  link: '/category/money-and-finance/reverse-mortgage/'
                 },
                 {
                   name: 'Municipal Bonds',
-                  link: '/category/finance/municipal-bonds/'
+                  link: '/category/money-and-finance/municipal-bonds/'
                 },
                 {
                   name: 'Credit Card',
-                  link: '/category/finance/credit-cards/'
+                  link: '/category/money-and-finance/credit-cards/'
                 },
                 {
                   name: 'Roth IRA',
-                  link: '/category/finance/roth-ira/'
+                  link: '/category/money-and-finance/roth-ira/'
                 },
                 {
                   name: 'SEP IRA',
-                  link: '/category/finance/sep-ira/'
+                  link: '/category/money-and-finance/sep-ira/'
                 },
                 {
                   name: 'Annuities',
-                  link: '/category/finance/annuities/'
+                  link: '/category/money-and-finance/annuities/'
                 },
               
               ]

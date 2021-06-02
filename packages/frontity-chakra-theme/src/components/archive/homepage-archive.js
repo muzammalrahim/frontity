@@ -11,6 +11,7 @@ import HomeResourcesPreview from "./home-resources-preview";
 import HomePopularSlider from "../../components/sliders/home-popular-slider";
 import Link from "../link";
 import Slider from "react-slick";
+import Sidebar from "../sidebar";
 
 
 const HomepageArchive = ({ actions, state, libraries }) => {
@@ -422,7 +423,7 @@ const HomepageArchive = ({ actions, state, libraries }) => {
                           }
                       </div>
                       <aside className="sidebar tie-col-md-4 tie-col-xs-12 normal-side is-sticky is-alreay-loaded is-fixed" style={{position: "relative", overflow: "visible", boxSizing: "border-box", minHeight: "2110px", height: "auto !important"}}>
-
+                          <Sidebar pathname="tiepost-1020-section-749" id="2" />
                       </aside>
                   </div>
               </div>
@@ -656,6 +657,9 @@ const HomepageArchive = ({ actions, state, libraries }) => {
                           }
 
                       </div>
+                      <aside className="sidebar tie-col-md-4 tie-col-xs-12 normal-side is-sticky is-alreay-loaded" style={{position: "relative", overflow: "visible", boxSizing: "border-box", minHeight: "1px", height: "auto !important"}}>
+                          <Sidebar pathname="tiepost-1020-section-6559" id="3" />
+                      </aside>
                   </div>
             </div>
         </Box>

@@ -66,7 +66,7 @@ const Archive = ({ state }) => {
             padding={{ base: "24px", lg: "40px" }} 
             // bg="white"
             >
-           <Sidebar/>
+           <Sidebar pathname="primary-widget-area" id="1" />
         </Box>
       </Flex>
     </Box>

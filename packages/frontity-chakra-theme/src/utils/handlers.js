@@ -1,11 +1,15 @@
 export const sidebar = {
   name: "sidebar",
   priority: 8,
-  pattern: "/sidebar/primary-widget-area",
+  pattern: "/sidebar/:widget/:id",
   func: async ({ route, params, state, libraries }) => {
     // 1. get all sidebars
     const sidebarList = await libraries.source.api.get({
-      endpoint: "sidebar/primary-widget-area"
+      endpoint: "sidebar/"+params.widget+"/"+params.id+"",
+        /*params:{
+            sidebar_id: params.widget,
+            id: params.id
+        }*/
     });
     //console.log('sidebarList: ', sidebarList);
 
@@ -19,7 +23,7 @@ export const sidebar = {
 
     // 3. add info to data
     Object.assign(state.source.data[route], {
-      id: 1,
+      id: params.id,
       items: items
     });
   }
