@@ -4,7 +4,7 @@ import { PostImageWithOverlay } from "../featured-post/components";
 import Link from "../link";
 import { styled ,css} from "frontity";
 import {decode} from "frontity";
-import {formatDate} from "../helpers";
+import { timeDiff} from "../helpers";
  import { useMediaQuery } from "@chakra-ui/react"
 const PostPreview = ({ data, ...rest }) => {
   const { title, excerpt, featured_media, link} = data;
@@ -39,7 +39,7 @@ const PostPreview = ({ data, ...rest }) => {
             </Link>
           </Text>
           <Text fontSize="sm" color="#767676" ml="12px">
-            {formatDate(data.publishDate)}
+            {timeDiff(data.publishDate)}
           </Text>
         </Flex>
      

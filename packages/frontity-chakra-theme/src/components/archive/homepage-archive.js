@@ -2,7 +2,7 @@ import { Box, Heading, SimpleGrid, Button } from "@chakra-ui/react";
 import { connect } from "frontity";
 import {React, useEffect, useState, useRef} from "react";
 import {FeaturedPostSection, SecondaryPostPreview} from "../featured-post/featured-post";
-import { formatPostData, splitPosts, getCategoryPosts, getPostCategories } from "../helpers";
+import { formatPostData, splitPosts, getPostCategories } from "../helpers";
 import { Newsletter } from "../newsletter";
 import HomeArchiveItem from "./home-archive-item";
 import { PaginationButton } from "./pagination";
@@ -18,6 +18,7 @@ const HomepageArchive = ({ actions, state, libraries }) => {
   const data = state.source.get(state.router.link);
   const allCats = state.source.get('all-categories');
   let slider = useRef(null);
+  let mainslider = useRef(null);
 
   const settings = {
       infinite: true,
@@ -36,6 +37,13 @@ const HomepageArchive = ({ actions, state, libraries }) => {
     slider.slickPrev();
   }
 
+  const nextMainSlide = () =>  {
+    mainslider.slickNext();
+  }
+  const previousMainSlide = () => {
+    mainslider.slickPrev();
+  }
+
   const catIds = allCats.items.filter(cat => {
       if(cat.id !== 3){
           return cat.id;
@@ -46,10 +54,16 @@ const HomepageArchive = ({ actions, state, libraries }) => {
 
   const [HasMore, setHasMore] = useState(true);
   const [whatsnewItems, setWhatsnewItems] = useState([]);
+  const [sliderItems, setSliderItems] = useState([]);
   const [pageWhatsnew, setPageWhatsnew] = useState(1);
+  let sliderPostItems = '';
 
   useEffect( async () => {
       await actions.source.fetch('/all-posts/'+catIds+'/'+pageWhatsnew);
+      await actions.source.fetch('/slider-posts');
+
+      sliderPostItems = state.source.get('/slider-posts');
+      setSliderItems(sliderPostItems);
       loadWhatsNew();
   },[]);
 
@@ -192,12 +206,61 @@ const HomepageArchive = ({ actions, state, libraries }) => {
   const [firstThreePosts, othersPosts] = splitPosts(state, data.items, 3);
   const [popularTopics, notRequiredTopics] = splitPosts(state, allResourcesPosts?allResourcesPosts.items : [], 4);
   const [popularSlidesPageOne, popularSlidesPageTwo] = splitPosts(state, popularTopics? popularTopics : [], 2);
+  const [topSlidesPageOne, topSlidesPageTwo] = splitPosts(state, sliderItems? sliderItems.items : [], 5);
 // console.log('popularTopics : ', popularTopics);
   return (
     <Box bg="white" as="section">
-      <FeaturedPostSection
+      {/*<FeaturedPostSection
         data={firstThreePosts.map(post => formatPostData(state, post))}
-      />
+      />*/}
+      <Box
+            /*py={{ base: "64px", md: "80px" }}
+            px={{ base: "24px", md: "40px" }}*/
+            width={{ base: "auto"}}
+            maxWidth="1200px"
+            mx="auto"
+            className="section-item is-first-section full-width"
+        >
+          <div className="container">
+                  <div className="tie-row main-content-row">
+                      <div className="main-content tie-col-md-12">
+                          <div id="tie-block_1354"
+                              className="slider-area mag-box">
+                              <div className="slider-area-inner">
+                                  <div id="tie-main-slider-14-block_1354"
+                                           className="tie-main-slider main-slider grid-5-first-big grid-5-slider boxed-slider grid-slider-wrapper tie-slick-slider-wrapper">
+                                          <div className="main-slider-inner">
+                                              <ul className="tie-slider-nav">
+                                                  <li className="slick-arrow">
+                                                      <span className="tie-icon-angle-left" onClick={previousMainSlide} />
+                                                  </li>
+                                                  <li className="slick-arrow">
+                                                      <span className="tie-icon-angle-right" onClick={nextMainSlide} />
+                                                  </li>
+                                              </ul>
+                                              <Slider ref={c => (mainslider = c)} {...settings}>
+                                                  {topSlidesPageOne && (
+                                                      <HomePopularSlider state={state} data={topSlidesPageOne} />
+                                                  )}
+                                                  {topSlidesPageTwo && (
+                                                      <HomePopularSlider state={state} data={topSlidesPageTwo} />
+                                                  )}
+                                                  {/*{popularTopics && popularTopics.map(({type, id}, index) => {
+                                                      const item = state.source[type][id];
+                                                      if(item){
+                                                          const postData = formatPostData(state, item);
+                                                          return <HomePopularSlider key={id} data={postData}/>;
+                                                      }
+                                                  })}*/}
+                                              </Slider>
+                                          </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+          </div>
+      </Box>
           <Box
               /*py={{ base: "64px", md: "80px" }}
             px={{ base: "24px", md: "40px" }}*/
@@ -358,6 +421,9 @@ const HomepageArchive = ({ actions, state, libraries }) => {
                           </div>
                           }
                       </div>
+                      <aside className="sidebar tie-col-md-4 tie-col-xs-12 normal-side is-sticky is-alreay-loaded is-fixed" style={{position: "relative", overflow: "visible", boxSizing: "border-box", minHeight: "2110px", height: "auto !important"}}>
+
+                      </aside>
                   </div>
               </div>
           </Box>

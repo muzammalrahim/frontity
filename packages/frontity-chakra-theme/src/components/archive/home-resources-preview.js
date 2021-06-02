@@ -2,7 +2,7 @@ import { Box, Flex, Heading } from "@chakra-ui/react";
 import React from "react";
 import {PostImage, PostImageWithOverlay} from "../featured-post/components";
 import Link from "../link";
-import { formatDate } from "../helpers";
+import { timeDiff } from "../helpers";
 import PostCategories from "../post/post-categories";
 import Image from "@frontity/components/image";
 
@@ -45,7 +45,7 @@ const HomeResourcesPreview = ({ data, isFirst, ...rest }) => {
                             </span>
                         </span>
                     </span>
-                    <span className="date meta-item tie-icon">{formatDate(publishDate)}</span>
+                    <span className="date meta-item tie-icon">{timeDiff(publishDate)}</span>
                 </div>
               </div>
             </div>
@@ -59,7 +59,7 @@ const HomeResourcesPreview = ({ data, isFirst, ...rest }) => {
               <div className="post-overlay">
                 <div className="post-content">
                     <div className="post-meta clearfix">
-                      <span className="date meta-item tie-icon">{formatDate(publishDate)}</span>
+                      <span className="date meta-item tie-icon">{timeDiff(publishDate)}</span>
                     </div>
                     <h2 className="post-title">
                       <Link link={link} dangerouslySetInnerHTML={{ __html: title}}  />

@@ -2,7 +2,7 @@ import Theme from "./components";
 import image from "@frontity/html2react/processors/image";
 import processors from "./components/styles/processors";
 // import { theme } from "@chakra-ui/react";
-import { sidebar, allCategories, myCategoriesHandler,getAllPosts } from "./utils/handlers";
+import { sidebar, allCategories, myCategoriesHandler, getAllPosts, getMainSliderPosts } from "./utils/handlers";
 
 const before = async ({ libraries, actions, state }) => {
   // We use html2react to process the <img> tags inside the content HTML.
@@ -12,6 +12,7 @@ const before = async ({ libraries, actions, state }) => {
   libraries.source.handlers.push(sidebar);
   libraries.source.handlers.push(allCategories);
   libraries.source.handlers.push(getAllPosts);
+  libraries.source.handlers.push(getMainSliderPosts);
   // libraries.source.handlers.push(myCategoriesHandler);
 
   // Fetch.

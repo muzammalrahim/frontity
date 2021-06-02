@@ -63,6 +63,42 @@ export const getAllPosts = {
   }
 };
 
+export const getMainSliderPosts = {
+  name: "slider-posts",
+  priority: 7,
+  pattern: "/slider-posts",
+  func: async ({ route, params, state, libraries }) => {
+    // 1. get all sidebars
+    const postResponse = await libraries.source.api.get({
+      endpoint: "posts",
+      params: {
+        per_page: 20, // To make sure you get all of them
+        _embed: true
+      }
+    });
+    //console.log('sidebarList: ', sidebarList);
+
+    // 2. add everything to the state.
+    const items = await libraries.source.populate({
+      response: postResponse,
+      state
+    });
+
+    // console.log('siderbar: ', items);
+
+    const total = libraries.source.getTotal(postResponse);
+    const totalPages = libraries.source.getTotalPages(postResponse);
+
+    // 3. add info to data
+    Object.assign(state.source.data[route], {
+      id: 1,
+      items: items,
+      totalPages,
+      total
+    });
+  }
+};
+
 export const allCategories = {
   name: "allCategories",
   priority: 10,

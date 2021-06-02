@@ -138,10 +138,50 @@ const formatDay = day => {
 export function formatDate(date) {
   const jsDate = new Date(date);
   const day = jsDate.getDate();
-  const month = jsDate.getMonth() + 1;
+  const month = jsDate.getMonth();
   const year = jsDate.getFullYear();
 
   return `${formatDay(day)} ${monthNames[month]}, ${year}`;
+}
+
+export function timeDiff(date) {
+  const jsDate = new Date(date);
+  var ms_Min = 60 * 1000; // milliseconds in Minute
+  var ms_Hour = ms_Min * 60; // milliseconds in Hour
+  var ms_Day = ms_Hour * 24; // milliseconds in day
+  var ms_Mon = ms_Day * 30; // milliseconds in Month
+  var ms_Yr = ms_Day * 365; // milliseconds in Year
+  var days = 24*60*60*1000;
+  var diff = new Date() - jsDate; //difference between dates.
+  var diffDays = Math.floor(diff / days);
+  // If the diff is less then milliseconds in a minute
+  if (diff < ms_Min) {
+      return Math.round(diff / 1000) + ' seconds ago';
+
+      // If the diff is less then milliseconds in a Hour
+  } else if (diff < ms_Hour) {
+      return Math.round(diff / ms_Min) + ' minutes ago';
+
+      // If the diff is less then milliseconds in a day
+  } else if (diff < ms_Day) {
+      return Math.round(diff / ms_Hour) + ' hours ago';
+
+      // If the diff is less then milliseconds in a Month
+  } else if (diffDays < 7) {
+      return diffDays + ' days ago';
+      // If the diff is less then milliseconds in a year
+  } else if(diffDays === 7){
+      return '1 week ago';
+  }else if (diffDays > 7 &&  diffDays <= 14)
+  {
+      return "2 weeks ago";
+  }
+  else if (diffDays === 30 || diffDays === 31)
+  {
+      return "1 month ago";
+  }else{
+      return formatDate(date);
+  }
 }
 
 export function isUrl(str) {
@@ -161,24 +201,3 @@ export function debounce(fn) {
     }
   ];
 }
-
-export const getCategoryPosts = async (catID, libraries, state, setData) => {
-
-  // Get other images
-  const postsResponse = await libraries.source.api.get({
-      endpoint: "posts",
-      params: {
-        categories: 51,
-        page: 1,
-        _embed: true
-      }
-    });
-
-  const entitiesAdded = await libraries.source.populate({ postsResponse, state });
-  // console.log('entitiesAdded: ',entitiesAdded);
-  await setData({
-    isReady: true,
-    items: entitiesAdded
-  });
-
-};

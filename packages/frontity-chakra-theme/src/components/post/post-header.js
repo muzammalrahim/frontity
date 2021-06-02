@@ -2,7 +2,7 @@ import { Box, Heading, Text } from "@chakra-ui/react";
 import React from "react";
 import Link from "../link";
 import PostCategories from "./post-categories";
-import { formatDate } from "../helpers";
+import {timeDiff} from "../helpers";
 import { decode } from "frontity";
 
 const PostHeader = ({
@@ -43,7 +43,7 @@ const PostHeader = ({
     {/* Don't show the date if we're on a page type */}
     {!isPage && date && (
       <Text fontSize="md" mt="12px">
-        {formatDate(date)}
+        {timeDiff(date)}
       </Text>
     )}
   </Box>

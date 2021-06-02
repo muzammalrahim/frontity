@@ -2,7 +2,7 @@ import { Box, Flex, Heading } from "@chakra-ui/react";
 import React from "react";
 import {PostImage, PostImageWithOverlay} from "../featured-post/components";
 import Link from "../link";
-import { formatDate } from "../helpers";
+import { timeDiff } from "../helpers";
 import PostCategories from "../post/post-categories";
 import Image from "@frontity/components/image";
 import {decode} from "frontity";
@@ -21,12 +21,12 @@ const SliderItem = ({ data, ...rest }) => {
                   </span>
                   <div className="thumb-content">
                       <div className="thumb-meta">
-                          <span className="date meta-item tie-icon">{formatDate(publishDate)}</span>
+                          <span className="date meta-item tie-icon">{timeDiff(publishDate)}</span>
                       </div>
                       <h2 className="thumb-title">
                           <Link link={link} dangerouslySetInnerHTML={{ __html: title}}  />
                       </h2>
-                      <div className="thumb-desc"  dangerouslySetInnerHTML={{ __html: excerpt}} />
+                      <div className="thumb-desc"  dangerouslySetInnerHTML={{ __html: excerpt && excerpt.length > 80 ? excerpt.slice(0,80)+'...' : excerpt}} />
                   </div>
               </div>
           </div>
