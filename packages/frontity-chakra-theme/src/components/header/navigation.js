@@ -122,9 +122,9 @@ const Navigation = ({ menu,state,actions,...props }) =>
         <SiteMenuItem  key={name} link={link}  onMouseLeave={()=>{setTimeout(() => {
                                                                actions.theme.hideSubmenu()
                                                              }, 500)   }} >
-        {submenu && <span  onPointerMove={()=>{actions.theme.showSubmenu(),actions.theme.showcurrentSubMenu(name)}} 
+        {submenu && <p  onPointerMove={()=>{actions.theme.showSubmenu(),actions.theme.showcurrentSubMenu(name)}} 
                         >  {name} 
-                        <TriangleDownIcon mb={1} ml={1} w={3} h={3}/> </span>} {!submenu  &&<p> {name}</p> }
+                        <TriangleDownIcon mb={1} ml={1} w={3} h={3}/> </p>} {!submenu  &&<p> {name}</p> }
 
         </SiteMenuItem>
        
@@ -168,22 +168,17 @@ export default connect(Navigation);
 const MenuItem = styled.ul`
 font-size: 10px ! important
 border : 2px solid
-background : black
+background : #1f2024;
 position : relative
 list-style : none;
 `;
 
 const MenuItem2 = styled.div`
 position: absolute;
-        top: 47px;
-        background: #000;
-        width:155px;
-    
-     
+        top: 46px;
+        background: #1f2024;;
+        width:180px;
         visibility: visible
-
-      
-
 `;
 
 

@@ -16,7 +16,7 @@ export const PostCategory = props => (
     fontWeight="medium"
     display="inline-block"
     padding=" 0 6px"
-    color="#fff"
+    color="#fff !important"
     borderRadius="3px"
     transition="0.3s"
     bg="#08f"
