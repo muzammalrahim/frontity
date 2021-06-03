@@ -91,7 +91,7 @@ const SiteMenuItem2 = ({ link, ...props }) => (
   <Box
     as="li"
     color="white"
-    fontSize={"10px"}
+    fontSize={"12px"}
     fontWeight="medium"
     fontFamily="Kelson"
     textTransform="uppercase"
@@ -171,13 +171,14 @@ border : 2px solid
 background : #1f2024;
 position : relative
 list-style : none;
+border-top: 4px solid #ffffff;
 `;
 
 const MenuItem2 = styled.div`
 position: absolute;
         top: 46px;
         background: #1f2024;;
-        width:180px;
+        width:230px;
         visibility: visible
 `;
 
