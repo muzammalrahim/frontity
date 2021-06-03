@@ -96,9 +96,9 @@ const Html2React = libraries.html2react.Component;
       <Box  
             width={_isSmallerThan900 ?{ lg: "100%" } :{ lg: "25%" }}
             padding={{ base: "24px", lg: "40px" }} 
-            // bg="white"
+      
         >
-            <Sidebar/>
+          <h1>slider</h1>
         </Box>
       </Flex>
     </Box>

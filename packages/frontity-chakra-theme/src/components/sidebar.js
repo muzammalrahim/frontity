@@ -11,7 +11,6 @@ const Sidebar = ({ state, pathname, id }) => {
     return (
         <Box>
             <Heading fontSize="2xl" as="h4" textTransform="uppercase">
-        
             </Heading>
              <SidebarItem  html={data.html} />
         </Box>
