@@ -98,7 +98,7 @@ const Html2React = libraries.html2react.Component;
             padding={{ base: "24px", lg: "40px" }} 
       
         >
-          <h1>slider</h1>
+        <Sidebar pathname="primary-widget-area" id="1" />
         </Box>
       </Flex>
     </Box>
