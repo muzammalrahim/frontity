@@ -45,7 +45,7 @@ const SiteLogoContainer = props => (
 
 const Logo = ({ isImage = true, src }) =>
   isImage ? (
-    <Box as="img" src={src} width="120px" />
+    <Box as="img" src={src} width="120px"  max-height= "123px" width= "auto" />
   ) : (
       <Box
         fontSize="2xl"

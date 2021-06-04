@@ -8,6 +8,8 @@ import Sidebar from "./../sidebar";
 import Pagination from "./pagination";
 import { decode } from "frontity";
 import { useMediaQuery } from "@chakra-ui/react"
+import { css } from "frontity";
+
 
 const Archive = ({ state }) => {
   // Get the data of the current list.
@@ -32,7 +34,8 @@ const Archive = ({ state }) => {
       )}*/}
 
   
-     <h1>  Home/{decode(state.source[data.taxonomy][data.id].name)}</h1>
+  {/*   <h1>  Home/{decode(state.source[data.taxonomy][data.id].name)}</h1>*/}
+
 
       {/* If the list is an author, we render a title. */}
       {data.isAuthor && (
@@ -51,6 +54,7 @@ const Archive = ({ state }) => {
         mx="auto"
        
       >
+    <h1 css={css `font-size: 41px;  font-weight: 700; margin-left: 40px;  font-family: poppins;`}>{decode(state.source[data.taxonomy][data.id].name)}</h1>
         {/* Iterate over the items of the list. */}
         <SimpleGrid columns={{ base: 1, md: 1 }} spacing="40px">
           {data.items.map(({ type, id }) => {
@@ -74,3 +78,4 @@ const Archive = ({ state }) => {
 };
 
 export default connect(Archive);
+

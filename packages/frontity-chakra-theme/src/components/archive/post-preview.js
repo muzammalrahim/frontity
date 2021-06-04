@@ -53,7 +53,9 @@ const PostPreview = ({ data, ...rest }) => {
         <Box
           flex="1"
           fontSize="sm" 
+          mt="10px"
           color= "#666666"
+          fontFamily="poppins"
           dangerouslySetInnerHTML={{ __html: excerpt }}
         />
   
