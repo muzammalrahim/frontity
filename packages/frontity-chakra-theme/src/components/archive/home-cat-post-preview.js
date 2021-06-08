@@ -24,14 +24,16 @@ const HomeCatPostPreview = ({ data, isFirst, ...rest }) => {
               {/*<a className="post-cat tie-cat-1"
                  href="https://seniorresourcehub.com/category/health-insurance/medicare/">Medicare</a>*/}
               <PostCategories justifyContent="flex-start" categories={categories} limit="1" />
-              <h2 className="post-title"><a href={link}>{title}</a></h2>
+              <h2 className="post-title">
+                  <Link link={link} dangerouslySetInnerHTML={{ __html: title }} />
+              </h2>
 
               <div className="thumb-meta">
                 <div className="post-meta clearfix">
                     <span className="author-meta single-author no-avatars">
                         <span className="meta-item meta-author-wrapper meta-author-3">
                             <span className="meta-author">
-                                <Link link={author.url} className="author-name tie-icon" dangerouslySetInnerHTML={{ __html: author.name }} />
+                                <Link link={author?.url} className="author-name tie-icon" dangerouslySetInnerHTML={{ __html: author?.name }} />
                                 {/*<a href={author.url} className="author-name tie-icon" title={author.name} >
                                     {author.name}
                                 </a>*/}

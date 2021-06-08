@@ -84,10 +84,10 @@ const Html2React = libraries.html2react.Component;
 
         <Section px={{ base: "32px", md: "0" }}>
           <AuthorBio
-            image={post.author.avatar_urls["96"]}
-            name={post.author.name}
-            description={post.author.description}
-            link={post.author.link}
+            image={post?.author?.avatar_urls["96"]}
+            name={post?.author?.name}
+            description={post?.author?.description}
+            link={post?.author?.link}
           />
         </Section>
       </Section>

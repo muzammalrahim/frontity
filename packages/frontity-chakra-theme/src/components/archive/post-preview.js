@@ -46,7 +46,9 @@ const PostPreview = ({ data, ...rest }) => {
        <Heading fontSize="20px" fontFamily="Poppins"  as="h4" 
       //  textTransform="uppercase"
        >  
-       <StyledDiv>  <Link  link={link}>{title}</Link>   </StyledDiv>
+       <StyledDiv>
+           <Link link={link} dangerouslySetInnerHTML={{ __html: title }} />
+       </StyledDiv>
       </Heading>
   
         

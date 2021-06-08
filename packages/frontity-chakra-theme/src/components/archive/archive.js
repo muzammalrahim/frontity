@@ -32,7 +32,7 @@ const Archive = ({ state }) => {
       )}*/}
 
   
-     <h1>  Home/{decode(state.source[data.taxonomy][data.id].name)}</h1>
+     {/*<h1>  Home/{decode(state.source[data?.taxonomy][data?.id].name)}</h1>*/}
 
       {/* If the list is an author, we render a title. */}
       {data.isAuthor && (
@@ -53,7 +53,7 @@ const Archive = ({ state }) => {
       >
         {/* Iterate over the items of the list. */}
         <SimpleGrid columns={{ base: 1, md: 1 }} spacing="40px">
-          {data.items.map(({ type, id }) => {
+          {data?.items?.map(({ type, id }) => {
             const item = state.source[type][id];
             // console.log('type id: '+id,type);
             return <ArchiveItem key={item.id} item={item} />;

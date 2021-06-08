@@ -596,7 +596,7 @@ const HomepageArchive = ({ actions, state, libraries }) => {
                                       <h3>
                                           What's New
                                       </h3>
-                                      <div className="tie-alignright">
+                                      {/*<div className="tie-alignright">
                                           <div className="mag-box-options">
                                               <ul className="slider-arrow-nav">
                                                   <li>
@@ -614,7 +614,7 @@ const HomepageArchive = ({ actions, state, libraries }) => {
                                                   </li>
                                               </ul>
                                           </div>
-                                      </div>
+                                      </div>*/}
                                   </div>
                                   <div className="mag-box-container clearfix">
 
